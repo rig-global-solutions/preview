@@ -57,34 +57,51 @@
         footer li::before {
             content: none;
         }
+        /* Footer specific group hover adjustments */
+        .group:hover .group-hover\:text-white { color: #fff; }
+        .group:hover .group-hover\:text-gray-200 { color: #e5e7eb; }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased flex flex-col min-h-screen">
 
+    <!-- UPDATED HEADER -->
     <header id="navbar" class="sticky-nav shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             
-            <a href="http://www.rigfinancialservices.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3">
-                <img src="https://www.rigfinancialservices.com/logo.png" alt="RIG Global Solutions Logo" class="h-12 w-auto"> 
+            <a href="https://rig-global-solutions.github.io/preview/" class="flex items-center gap-3">
+                <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="RIG Global Solutions Logo" class="h-12 w-auto"> 
                 <div>
                     <h4 class="text-xl font-bold text-gray-800">RIG Global Solutions</h4>
                     <p class="text-xs text-gray-600">Empowering Solutions - Strategically, Sustainably & Globally</p>
                 </div>
             </a>
             
-            <div class="hidden md:flex items-center space-x-6">
-                <a href="https://www.rigfinancialservices.com/career_home.html" class="nav-link text-gray-600 text-sm">Home</a>
+            <div class="hidden md:flex space-x-4">
+                <a href="https://rig-global-solutions.github.io/preview/#mission" class="nav-link text-gray-600 text-sm">Our Mission</a>
+                <a href="https://rig-global-solutions.github.io/preview/#philosophy" class="nav-link text-gray-600 text-sm">Why Us</a>
+                <a href="https://rig-global-solutions.github.io/preview/#pathway" class="nav-link text-gray-600 text-sm">Career Path</a>
+                <a href="https://rig-global-solutions.github.io/preview/#departments" class="nav-link text-gray-600 text-sm">Departments</a>
+                <a href="https://rig-global-solutions.github.io/preview/#openings" class="nav-link text-gray-600 text-sm">Openings</a>
             </div>
+            
+            <!-- Default General Application Link since this is a department page, not a specific job -->
+            <a href="https://forms.gle/teDcmwUh1XysX4T9A" target="_blank" class="hidden md:block bg-[#3A3A3A] text-white py-2 px-4 rounded-lg hover:bg-[#505050] transition-colors text-sm">Apply Now</a>
             
             <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
                 <span class="text-3xl">☰</span>
             </button>
         </nav>
         <div id="mobile-menu" class="hidden md:hidden">
-            <a href="https://www.rigfinancialservices.com/career_home.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Home</a>
+            <a href="https://rig-global-solutions.github.io/preview/#mission" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Our Mission</a>
+            <a href="https://rig-global-solutions.github.io/preview/#philosophy" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Why Us</a>
+            <a href="https://rig-global-solutions.github.io/preview/#pathway" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Career Path</a>
+            <a href="https://rig-global-solutions.github.io/preview/#departments" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Departments</a>
+            <a href="https://rig-global-solutions.github.io/preview/#openings" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Openings</a>
+             <a href="https://forms.gle/teDcmwUh1XysX4T9A" target="_blank" class="block py-2 px-4 text-sm bg-[#3A3A3A] text-white text-center rounded-b-lg hover:bg-[#505050] transition-colors">Apply Now</a>
         </div>
     </header>
-    <main>
+
+    <main class="flex-grow">
         <section id="hero" class="py-20 md:py-28 bg-[#F8F5F1]">
             <div class="container mx-auto px-6 text-center">
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight">Drive the Engine of Growth</h1>
@@ -185,13 +202,14 @@
 
     </main>
 
+    <!-- UPDATED FOOTER -->
     <footer class="bg-[#2a2a2a] text-gray-300 py-12">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
                 
                 <div class="md:col-span-4">
-                    <a href="http://www.rigfinancialservices.com" target="_blank" rel="noopener noreferrer" class="flex items-start gap-4 hover:text-white group">
-                        <img src="https://www.rigfinancialservices.com/logo.png" alt="RIG Global Solutions Logo" class="logo h-16 w-auto flex-shrink-0">
+                    <a href="https://rig-global-solutions.github.io/preview/" target="_blank" rel="noopener noreferrer" class="flex items-start gap-4 hover:text-white group">
+                        <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="RIG Global Solutions Logo" class="logo h-16 w-auto flex-shrink-0">
                         <div class="brand-text">
                             <h3 class="text-lg font-semibold text-white mb-2 whitespace-nowrap group-hover:text-white">RIG Global Solutions</h3>
                             <p class="text-sm text-gray-300 group-hover:text-gray-200">Empowering Solutions - Strategically,</p>
@@ -203,7 +221,7 @@
                 <div class="md:col-span-2">
                     <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="https://www.rigfinancialservices.com/career_home.html#openings" class="hover:text-white">Current Openings</a></li>
+                        <li><a href="https://rig-global-solutions.github.io/preview/#openings" class="hover:text-white">Current Openings</a></li>
                         <li><a href="#" class="hover:text-white">Application Status</a></li>
                         <li><a href="#" class="hover:text-white">Company Policies</a></li>
                     </ul>
@@ -211,11 +229,11 @@
 
                 <div class="md:col-span-4">
                     <h3 class="text-lg font-semibold text-white mb-4">Contact</h3>
-                       <ul class="space-y-2 text-sm">
+                        <ul class="space-y-2 text-sm">
                             <li class="whitespace-nowrap">Email: <a href="mailto:talent@rigfinancialservices.com" class="hover:text-white">talent@rigfinancialservices.com</a></li>
                             <li class="whitespace-nowrap">Phone: <a href="tel:+918617715655" class="hover:text-white">+91 86177 15655</a></li>
-                            <li class="whitespace-nowrap">Website: <a href="http://www.rigfinancialservices.com" target="_blank" class="hover:text-white">www.rigfinancialservices.com</a></li>
-                       </ul>
+                            <li class="whitespace-nowrap">Website: <a href="https://rig-global-solutions.github.io/preview/" target="_blank" class="hover:text-white">rig-global-solutions.github.io/preview/</a></li>
+                        </ul>
                 </div>
 
                 <div class="md:col-span-2">
@@ -230,6 +248,7 @@
                 </div>
             </div>
             <div class="mt-8 pt-8 border-t border-gray-700 text-center text-sm text-gray-500">
+                <p>Equal Opportunity Employer | Data Privacy Policy | Terms & Conditions</p>
                 <p>&copy; 2025 RIG Global Solutions. All Rights Reserved.</p>
             </div>
         </div>
@@ -308,12 +327,13 @@
                     
                     let actionButtonHtml;
 
+                    // Updated URLs to GitHub Pages
                     if (job.title === 'Sales Representative' && job.level === 'Trainee') {
-                        actionButtonHtml = `<a href="https://www.rigfinancialservices.com/career_sales_sr.html" target="_blank" class="bg-[#3A3A3A] text-white py-2 px-4 rounded-lg hover:bg-[#505050] transition-colors whitespace-nowrap">Know More</a>`;
+                        actionButtonHtml = `<a href="https://rig-global-solutions.github.io/preview/career_sales_sr.html" target="_blank" class="bg-[#3A3A3A] text-white py-2 px-4 rounded-lg hover:bg-[#505050] transition-colors whitespace-nowrap">Know More</a>`;
                     } else if (job.title === 'Client Success Manager') {
-                        actionButtonHtml = `<a href="https://www.rigfinancialservices.com/career_sales_csm.html" target="_blank" class="bg-[#3A3A3A] text-white py-2 px-4 rounded-lg hover:bg-[#505050] transition-colors whitespace-nowrap">Know More</a>`;
+                        actionButtonHtml = `<a href="https://rig-global-solutions.github.io/preview/career_sales_csm.html" target="_blank" class="bg-[#3A3A3A] text-white py-2 px-4 rounded-lg hover:bg-[#505050] transition-colors whitespace-nowrap">Know More</a>`;
                     } else if (job.title === 'Telecaller / Telesales Executives') {
-                        actionButtonHtml = `<a href="https://www.rigfinancialservices.com/career_sales_telesales.html" target="_blank" class="bg-[#3A3A3A] text-white py-2 px-4 rounded-lg hover:bg-[#505050] transition-colors whitespace-nowrap">Know More</a>`;
+                        actionButtonHtml = `<a href="https://rig-global-solutions.github.io/preview/career_sales_telesales.html" target="_blank" class="bg-[#3A3A3A] text-white py-2 px-4 rounded-lg hover:bg-[#505050] transition-colors whitespace-nowrap">Know More</a>`;
                     } else {
                          actionButtonHtml = `<a href="https://forms.gle/bHxCRrtxVYRxoYaG7" target="_blank" class="bg-[#3A3A3A] text-white py-2 px-4 rounded-lg hover:bg-[#505050] transition-colors whitespace-nowrap">Apply Now</a>`;
                     }
@@ -334,7 +354,7 @@
                 jobListingsContainer.innerHTML = `<p class="text-center text-gray-600">There are currently no open positions in the Sales department. Please check back later.</p>`;
             }
 
-            // --- Mobile Menu logic from Script 2 ---
+            // --- Mobile Menu logic ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
 
@@ -357,9 +377,16 @@
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     if (this.getAttribute('href').startsWith('#')) {
-                        e.preventDefault();
-                        const targetElement = document.querySelector(this.getAttribute('href'));
+                        // For links that are just hash anchors on the same page
+                        const targetId = this.getAttribute('href');
+                        if(targetId === '#') return;
+                        
+                        // Check if it's a full URL ending in a hash or just a hash
+                        const elementId = targetId.includes('#') ? targetId.split('#')[1] : targetId;
+                        const targetElement = document.getElementById(elementId);
+                        
                         if (targetElement) {
+                            e.preventDefault();
                             targetElement.scrollIntoView({
                                 behavior: 'smooth'
                             });
@@ -368,7 +395,7 @@
                 });
             });
 
-            // --- Sticky Header Hide/Show on Scroll from Script 2 ---
+            // --- Sticky Header Hide/Show on Scroll ---
             const header = document.getElementById('navbar');
             let lastScrollTop = 0;
             if (header) {
@@ -385,7 +412,7 @@
                 });
             }
 
-            // --- Scroll to Top Button from Script 2 ---
+            // --- Scroll to Top Button ---
             const scrollToTopBtn = document.getElementById('scrollToTopBtn');
             if (scrollToTopBtn) {
                 window.addEventListener('scroll', () => {
