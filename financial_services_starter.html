@@ -360,93 +360,121 @@
                 </svg>
                 Included Service Details
             </h3>
-            <div id="accordion-container" class="space-y-4">
-                <!-- Accordion Item 1 -->
-                <div>
-                    <button class="accordion-button w-full text-left flex justify-between items-center p-4 bg-slate-100 hover:bg-slate-200 rounded-lg focus:outline-none">
-                        <span class="font-semibold text-lg">1. Financial Planning (Goal-based, Investment, Tax, Estate)</span>
-                        <svg class="w-6 h-6 transform transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    <div class="accordion-content p-4 border-l-4 border-slate-200 ml-2">
-                        <p class="font-semibold">Objective:</p>
-                        <p class="mb-3 text-slate-600">To create a comprehensive roadmap aligning client's financial resources with their life goals.</p>
-                        <p class="font-semibold">Key Deliverables:</p>
-                        <ul class="list-disc list-inside text-slate-600 space-y-1 mt-1">
-                            <li>Personalized Financial Plan Document</li>
-                            <li>Goal Analysis and Prioritization Report</li>
-                            <li>Basic Investment Strategy Suggestion</li>
-                            <li>Tax-saving Investment Recommendations (Sec 80C, etc.)</li>
-                            <li>Introductory Estate Planning Checklist</li>
+            
+            <!-- SWITCHED FROM ACCORDION TO GRID FOR BETTER SPACE USAGE -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Service Item 1 -->
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="flex items-start mb-4">
+                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0">
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg leading-tight text-slate-800">Financial Planning</h4>
+                            <p class="text-sm text-slate-500 mt-1">Goal-based, Investment, Tax, Estate</p>
+                        </div>
+                    </div>
+                    <div class="pl-0 md:pl-16">
+                        <p class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-2">Key Deliverables:</p>
+                        <ul class="space-y-2 text-slate-600">
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Personalized Financial Plan Document</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Goal Analysis and Prioritization Report</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Basic Investment Strategy Suggestion</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Tax-saving Investment Recommendations</li>
                         </ul>
                     </div>
                 </div>
-                <!-- Accordion Item 2 -->
-                <div>
-                    <button class="accordion-button w-full text-left flex justify-between items-center p-4 bg-slate-100 hover:bg-slate-200 rounded-lg focus:outline-none">
-                        <span class="font-semibold text-lg">2. Retirement Planning</span>
-                        <svg class="w-6 h-6 transform transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    <div class="accordion-content p-4 border-l-4 border-slate-200 ml-2">
-                        <p class="font-semibold">Objective:</p>
-                        <p class="mb-3 text-slate-600">To assess retirement readiness and create a strategy to build a sufficient corpus for a comfortable post-retirement life.</p>
-                        <p class="font-semibold">Key Deliverables:</p>
-                        <ul class="list-disc list-inside text-slate-600 space-y-1 mt-1">
-                            <li>Retirement Corpus Calculation Report</li>
-                            <li>Analysis of existing retirement accounts (EPF, PPF)</li>
-                            <li>Recommendations for NPS and other retirement-focused investments.</li>
+
+                <!-- Service Item 2 -->
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="flex items-start mb-4">
+                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0">
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg leading-tight text-slate-800">Retirement Planning</h4>
+                            <p class="text-sm text-slate-500 mt-1">Corpus building & Assessment</p>
+                        </div>
+                    </div>
+                    <div class="pl-0 md:pl-16">
+                        <p class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-2">Key Deliverables:</p>
+                        <ul class="space-y-2 text-slate-600">
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Retirement Corpus Calculation Report</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Analysis of existing accounts (EPF, PPF)</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>NPS & retirement-focused recommendations</li>
                         </ul>
                     </div>
                 </div>
-                <!-- Accordion Item 3 -->
-                <div>
-                    <button class="accordion-button w-full text-left flex justify-between items-center p-4 bg-slate-100 hover:bg-slate-200 rounded-lg focus:outline-none">
-                        <span class="font-semibold text-lg">3. Credit Advisory (Loans, Credit Score)</span>
-                        <svg class="w-6 h-6 transform transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    <div class="accordion-content p-4 border-l-4 border-slate-200 ml-2">
-                        <p class="font-semibold">Objective:</p>
-                        <p class="mb-3 text-slate-600">To help clients understand and improve their credit health for better borrowing capacity and lower interest rates.</p>
-                        <p class="font-semibold">Key Deliverables:</p>
-                        <ul class="list-disc list-inside text-slate-600 space-y-1 mt-1">
-                            <li>Credit Score Analysis Report</li>
-                            <li>Action plan for credit score improvement</li>
-                            <li>Basic advisory on loan options (Home, Personal) based on profile</li>
+
+                <!-- Service Item 3 -->
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="flex items-start mb-4">
+                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0">
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg leading-tight text-slate-800">Credit Advisory</h4>
+                            <p class="text-sm text-slate-500 mt-1">Loans & Credit Score Health</p>
+                        </div>
+                    </div>
+                    <div class="pl-0 md:pl-16">
+                        <p class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-2">Key Deliverables:</p>
+                        <ul class="space-y-2 text-slate-600">
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Credit Score Analysis Report</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Action plan for score improvement</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Advisory on loan options (Home, Personal)</li>
                         </ul>
                     </div>
                 </div>
-                 <!-- Accordion Item 4 -->
-                 <div>
-                    <button class="accordion-button w-full text-left flex justify-between items-center p-4 bg-slate-100 hover:bg-slate-200 rounded-lg focus:outline-none">
-                        <span class="font-semibold text-lg">4. Insurance Advisory (Life, Health, General)</span>
-                        <svg class="w-6 h-6 transform transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    <div class="accordion-content p-4 border-l-4 border-slate-200 ml-2">
-                        <p class="font-semibold">Objective:</p>
-                        <p class="mb-3 text-slate-600">To ensure the client is adequately protected against life's uncertainties and financial risks.</p>
-                        <p class="font-semibold">Key Deliverables:</p>
-                        <ul class="list-disc list-inside text-slate-600 space-y-1 mt-1">
-                            <li>Insurance Need Analysis (Life and Health)</li>
-                            <li>Review of existing insurance policies</li>
-                            <li>Recommendations for appropriate Term, Health, and Personal Accident policies</li>
+
+                 <!-- Service Item 4 -->
+                 <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="flex items-start mb-4">
+                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0">
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg leading-tight text-slate-800">Insurance Advisory</h4>
+                            <p class="text-sm text-slate-500 mt-1">Life, Health, General Protection</p>
+                        </div>
+                    </div>
+                    <div class="pl-0 md:pl-16">
+                        <p class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-2">Key Deliverables:</p>
+                        <ul class="space-y-2 text-slate-600">
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Insurance Need Analysis (Life and Health)</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Review of existing insurance policies</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Recommendations for Term & Health plans</li>
                         </ul>
                     </div>
                 </div>
-                 <!-- Accordion Item 5 -->
-                 <div>
-                    <button class="accordion-button w-full text-left flex justify-between items-center p-4 bg-slate-100 hover:bg-slate-200 rounded-lg focus:outline-none">
-                        <span class="font-semibold text-lg">5. Budgeting & Expense Tracking</span>
-                        <svg class="w-6 h-6 transform transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    <div class="accordion-content p-4 border-l-4 border-slate-200 ml-2">
-                        <p class="font-semibold">Objective:</p>
-                        <p class="mb-3 text-slate-600">To provide clients with visibility and control over their cash flow, enabling them to save more effectively.</p>
-                        <p class="font-semibold">Key Deliverables:</p>
-                        <ul class="list-disc list-inside text-slate-600 space-y-1 mt-1">
-                            <li>Customized Monthly Budget Template</li>
-                            <li>Analysis of spending patterns</li>
-                            <li>Strategies to optimize expenses and increase savings rate</li>
-                            <li>Guidance on using expense tracking apps/tools</li>
-                        </ul>
+
+                 <!-- Service Item 5 (Spans 2 columns on desktop) -->
+                 <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 md:col-span-2">
+                    <div class="flex items-start mb-4">
+                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0">
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg leading-tight text-slate-800">Budgeting & Expense Tracking</h4>
+                            <p class="text-sm text-slate-500 mt-1">Cash flow control & Savings Optimization</p>
+                        </div>
+                    </div>
+                    <div class="pl-0 md:pl-16 grid md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-2">Key Deliverables:</p>
+                            <ul class="space-y-2 text-slate-600">
+                                <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Customized Monthly Budget Template</li>
+                                <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Analysis of spending patterns</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-2 md:invisible">More:</p>
+                             <ul class="space-y-2 text-slate-600">
+                                <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Strategies to increase savings rate</li>
+                                <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Guidance on using expense apps</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -660,22 +688,6 @@
                         e.preventDefault(); // Prevent navigating to the link
                         const parent = this.parentElement;
                         parent.classList.toggle('dropdown-active'); // Toggle visibility
-                    }
-                });
-            });
-
-            // --- JavaScript for Accordion (Operational Blueprint) ---
-            const accordionButtons = document.querySelectorAll('.accordion-button');
-            accordionButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const content = button.nextElementSibling;
-                    const icon = button.querySelector('svg');
-
-                    button.classList.toggle('active');
-                    if (button.classList.contains('active')) {
-                        icon.style.transform = 'rotate(180deg)';
-                    } else {
-                        icon.style.transform = 'rotate(0deg)';
                     }
                 });
             });
