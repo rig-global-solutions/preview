@@ -14,7 +14,7 @@
             --accent-color: #FFC425;  /* Innovation Gold */
             --dark-color: #333333;    /* Foundation Grey */
             --light-color: #ffffff;   /* Pure White */
-            --grey-bg: #F8F9FA;      /* Cloud White */
+            --grey-bg: #F8F9FA;       /* Cloud White */
             --border-color: #dee2e6;
             --font-family: 'Poppins', sans-serif;
             --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
@@ -34,7 +34,8 @@
             font-family: var(--font-family);
             line-height: 1.7;
             color: var(--dark-color);
-            background-color: var(--white);
+            background-color: var(--light-color);
+            overflow-x: hidden;
         }
 
         /* --- Utility Classes --- */
@@ -42,6 +43,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 25px;
+            position: relative; /* Context for mega menu width if needed */
         }
         .section {
             padding: 80px 0;
@@ -97,19 +99,102 @@
             font-size: 0.8rem;
             color: var(--dark-color);
         }
-        .main-nav ul { list-style: none; display: flex; }
+        
+        .main-nav ul { list-style: none; display: flex; align-items: center; }
         .main-nav ul li { margin-left: 30px; }
-        .main-nav ul li a {
+        .main-nav ul li a.nav-link {
             text-decoration: none;
             color: var(--dark-color);
             font-weight: 600;
             transition: color 0.3s ease;
             padding: 5px 0;
             border-bottom: 2px solid transparent;
+            display: block;
         }
-        .main-nav ul li a:hover, .main-nav ul li a.active {
+        .main-nav ul li a.nav-link:hover, .main-nav ul li a.nav-link.active {
             color: var(--primary-color);
             border-bottom-color: var(--accent-color);
+        }
+
+        /* --- MEGA MENU CSS (Integrated from Script 2) --- */
+        .has-megamenu {
+            position: static; /* Allows menu to be full width of container/header */
+        }
+        
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: var(--light-color);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-top: 3px solid var(--primary-color);
+            padding: 40px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        /* Hover Effect for Desktop */
+        @media (min-width: 993px) {
+            .has-megamenu:hover .mega-menu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+        }
+
+        .mega-menu-inner {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .mega-menu-col .category {
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .mega-menu-col ul {
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+
+        .mega-menu-col ul li {
+            margin: 0 0 15px 0;
+            display: block;
+        }
+
+        .mega-menu-col ul li a {
+            font-weight: 400;
+            padding: 8px 15px;
+            display: block;
+            text-decoration: none;
+            color: var(--dark-color);
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            border-radius: 4px;
+        }
+
+        .mega-menu-col ul li a:hover {
+            color: var(--primary-color);
+            border-left-color: var(--growth-color);
+            background: rgba(0, 51, 160, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .mega-menu-col ul li a.current-page {
+             font-weight: 600;
+             color: var(--primary-color);
+             background: rgba(0, 51, 160, 0.05);
         }
 
         /* --- Hero Section --- */
@@ -153,7 +238,7 @@
             gap: 30px;
         }
         .service-card {
-            background: var(--white);
+            background: var(--light-color);
             padding: 30px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
@@ -205,7 +290,7 @@
         /* --- CTA Section --- */
         #contact { text-align: center; }
         #contact .container { max-width: 700px; }
-       
+        
         /* --- Footer --- */
         .main-footer {
             background-color: var(--dark-color);
@@ -248,12 +333,54 @@
         
         @media (max-width: 992px) {
             .footer-grid { grid-template-columns: 1fr 1fr; }
+            
+            /* Responsive Mega Menu Logic */
+            .main-nav {
+                /* Since the original script didn't have a hamburger toggle, 
+                   we will maintain the column layout for mobile but improve styling 
+                   or assume a simple stack for now as per original request to just update links */
+            }
+            
+            .main-header .container { flex-direction: column; gap: 15px; }
+            .main-nav ul { padding: 0; flex-direction: column; width: 100%; }
+            .main-nav ul li { margin: 10px 0; width: 100%; text-align: center; }
+            
+            /* Mobile Mega Menu Styling */
+            .has-megamenu .mega-menu {
+                display: none;
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border-top: none;
+                padding: 10px 0;
+                background-color: #f9f9f9;
+            }
+            
+            /* Toggle class added via JS */
+            .has-megamenu.dropdown-active .mega-menu {
+                display: block;
+            }
+
+            .mega-menu-inner {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                padding: 0 20px;
+                text-align: left;
+            }
+            
+            .mega-menu-col .category {
+                font-size: 1rem;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #ddd;
+            }
         }
+        
         @media (max-width: 768px) {
             h1 { font-size: 2.8rem; }
             h2 { font-size: 2rem; }
-            .main-header .container { flex-direction: column; gap: 15px; }
-            .main-nav ul { padding: 0; }
             .hero { height: auto; padding: 120px 0 80px 0; }
             .footer-grid { grid-template-columns: 1fr; text-align: center; }
             .footer-col .brand, .footer-col ul { justify-content: center; }
@@ -264,8 +391,8 @@
 
     <header class="main-header">
         <div class="container">
-            <a href="https://www.rigfinancialservices.com/" class="brand">
-                <img src="https://www.rigfinancialservices.com/logo.png" alt="Rig Global Solutions Logo" class="logo">
+            <a href="https://rig-global-solutions.github.io/preview/" class="brand">
+                <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="Rig Global Solutions Logo" class="logo">
                 <div class="brand-text">
                     <h4>Rig Global Solutions</h4>
                     <p>Empowering Solutions- Strategically, Sustainably & Globally</p>
@@ -273,8 +400,44 @@
             </a>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="https://www.rigfinancialservices.com/" class="nav-link">Home</a></li>
-                    <li><a href="#services" class="nav-link active">Services</a></li>
+                    <li><a href="https://rig-global-solutions.github.io/preview/" class="nav-link">Home</a></li>
+                    <li><a href="sarathi.html" class="nav-link">Sarathi</a></li>
+                    
+                    <!-- Updated Services Mega Menu -->
+                    <li class="has-megamenu">
+                        <a href="#services" class="nav-link">Services <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 5px;"></i></a>
+                        <div class="mega-menu">
+                            <div class="container mega-menu-inner">
+                                <div class="mega-menu-col">
+                                    <h4 class="category">Foundational Services</h4>
+                                    <ul>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/accounting_page.html">Accounting & Bookkeeping</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/legal_page.html">Legal & Corporate Services</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/tax_page.html">Tax & Compliance</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/hr_page.html">Human Resources Services</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-col">
+                                    <h4 class="category">Growth & Strategy</h4>
+                                    <ul>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/business_strategy_page.html">Business Strategy & Consulting</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/finance_page.html">Strategic Financial Solutions</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/marketing_&_branding_page.html">Branding & Marketing</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-col">
+                                    <h4 class="category">Technology & Automation</h4>
+                                    <ul>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/web_development_page.html">Web Design & Development</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/crm_page.html">CRM & System Automation</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/it_page.html">IT Infrastructure & Support</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- End Services Mega Menu -->
+
                     <li><a href="#why-us" class="nav-link">Why Us</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
@@ -287,7 +450,7 @@
             <div class="container hero-content fade-in">
                 <h1>For Government & Public Sector</h1>
                 <p>Bridge policy and practice with our expertise in feasibility studies, project management, and public-private partnerships.</p>
-                <a href="https://www.rigfinancialservices.com/show_your_interest_page.html" class="btn">Learn How We Can Help</a>
+                <a href="https://rig-global-solutions.github.io/preview/show_your_interest_page.html" class="btn">Learn How We Can Help</a>
             </div>
         </section>
 
@@ -330,35 +493,35 @@
                             <p>We uniquely blend strategic advisory with hands-on execution to ensure policies are effectively implemented.</p>
                         </div>
                     </div>
-                     <div class="why-us-item fade-in" style="transition-delay: 100ms;">
+                      <div class="why-us-item fade-in" style="transition-delay: 100ms;">
                         <div class="icon">🇮🇳</div>
                          <div>
                             <h4>Alignment with National Goals</h4>
                             <p>Our mission is deeply rooted in fostering national development, empowering youth, and supporting Make in India.</p>
                         </div>
                     </div>
-                     <div class="why-us-item fade-in" style="transition-delay: 200ms;">
+                      <div class="why-us-item fade-in" style="transition-delay: 200ms;">
                         <div class="icon">🌿</div>
                          <div>
                             <h4>Sustainable Development Focus</h4>
                             <p>We align projects with sustainable frameworks, ensuring a long-term positive impact for communities.</p>
                         </div>
                     </div>
-                     <div class="why-us-item fade-in" style="transition-delay: 300ms;">
+                      <div class="why-us-item fade-in" style="transition-delay: 300ms;">
                         <div class="icon">👥</div>
                          <div>
                             <h4>Cross-Functional Team</h4>
                             <p>Our integrated team provides a holistic, 360-degree perspective on complex public sector challenges.</p>
                         </div>
                     </div>
-                     <div class="why-us-item fade-in" style="transition-delay: 400ms;">
+                      <div class="why-us-item fade-in" style="transition-delay: 400ms;">
                         <div class="icon">📝</div>
                          <div>
                             <h4>Proven Public Sector Experience</h4>
                             <p>As a registered GeM seller, we understand the nuances of public sector procurement and project delivery.</p>
                         </div>
                     </div>
-                     <div class="why-us-item fade-in" style="transition-delay: 500ms;">
+                      <div class="why-us-item fade-in" style="transition-delay: 500ms;">
                         <div class="icon">💡</div>
                          <div>
                             <h4>Innovation & Modernization</h4>
@@ -373,7 +536,7 @@
              <div class="container fade-in">
                 <h2>Build a More Resilient and Prosperous Future</h2>
                 <p>Let's collaborate to build impactful public projects that drive progress and serve our communities effectively. Contact our public sector advisory team to discuss your initiative.</p>
-                <a href="https://www.rigfinancialservices.com/show_your_interest_page.html" class="btn">Contact Us</a>
+                <a href="https://rig-global-solutions.github.io/preview/show_your_interest_page.html" class="btn">Contact Us</a>
             </div>
         </section>
 
@@ -383,8 +546,8 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="https://www.rigfinancialservices.com/" class="brand" style="margin-bottom: 1.5rem; display: inline-flex;">
-                        <img src="https://www.rigfinancialservices.com/logo.png" alt="Rig Global Solutions Logo" class="logo">
+                    <a href="https://rig-global-solutions.github.io/preview/" class="brand" style="margin-bottom: 1.5rem; display: inline-flex;">
+                        <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="Rig Global Solutions Logo" class="logo">
                         <div class="brand-text">
                            <h4>Rig Global Solutions</h4>
                            <p>Empowering Solutions- Strategically, Sustainably & Globally</p>
@@ -440,6 +603,10 @@
         // --- Active Nav Link on Scroll ---
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
+        
+        // Exclude dropdown links from the scroll spy
+        const pageNavLinks = Array.from(navLinks).filter(link => !link.closest('.mega-menu'));
+
         window.addEventListener('scroll', ()=> {
             let current = '';
             sections.forEach( section => {
@@ -449,7 +616,7 @@
                 }
             })
             
-            navLinks.forEach( a => {
+            pageNavLinks.forEach( a => {
                 a.classList.remove('active');
                 if(a.getAttribute('href').substring(1) === current){
                     a.classList.add('active');
@@ -460,10 +627,34 @@
         // --- Smooth Scrolling for anchor links ---
          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                // Allow default behavior for non-internal links or if it triggers mega menu on mobile
+                if (this.getAttribute('href') === "#services" && window.innerWidth <= 992) {
+                    // Let the mega menu toggle script handle it
+                    return;
+                }
+                
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                         target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // --- Mobile Mega Menu Toggle ---
+        const menuItemsWithChildren = document.querySelectorAll('.has-megamenu > a');
+        menuItemsWithChildren.forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Check if we are on a mobile screen size (<= 992px matches CSS breakpoint)
+                if (window.innerWidth <= 992) {
+                    e.preventDefault(); // Prevent navigating to the link
+                    const parent = this.parentElement;
+                    parent.classList.toggle('dropdown-active'); // Toggle visibility
+                }
             });
         });
     </script>
