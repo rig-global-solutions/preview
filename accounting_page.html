@@ -134,7 +134,11 @@
             box-shadow: var(--shadow-medium); border-top: 3px solid var(--primary-color); padding: 40px 0;
             opacity: 0; visibility: hidden; transform: translateY(20px); transition: var(--transition-smooth);
         }
-        .has-megamenu:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        /* Desktop Hover Effect */
+        @media (min-width: 993px) {
+            .has-megamenu:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        }
+        
         .mega-menu-inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
         .mega-menu-col .category {
             font-weight: 700; font-size: 1.1rem; text-transform: uppercase; color: var(--primary-color);
@@ -306,7 +310,37 @@
             .main-nav.active { display: block; }
             .main-nav ul { flex-direction: column; text-align: center; }
             .main-nav ul li { margin: 15px 0; }
-            .has-megamenu .mega-menu { display: none !important; }
+            
+            /* EDITED: Mobile Mega Menu Logic */
+            .has-megamenu .mega-menu { 
+                display: none; /* Changed from !important to standard none */
+                position: relative; /* Static positioning for mobile flow */
+                top: 0;
+                box-shadow: none;
+                padding: 10px 0;
+                background: #f4f6f8; /* Slightly darker bg for nested feel */
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+            }
+            
+            /* Class toggled by JS to show menu */
+            .has-megamenu.dropdown-active .mega-menu {
+                display: block;
+            }
+
+            .mega-menu-inner {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                padding: 0 20px;
+            }
+
+            .mega-menu-col .category {
+                border-bottom: 1px solid #ccc;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+            }
 
             h1 { font-size: 2.5rem; }
             h2 { font-size: 2rem; }
@@ -349,7 +383,7 @@
                 <ul>
                     <li><a href="https://rig-global-solutions.github.io/preview/">Home</a></li>
                     <li><a href="sarathi.html">Sarathi</a></li>
-                    <li class="has-megamenu">
+                    <li class="has-megamenu" id="servicesDropdown">
                         <a href="https://rig-global-solutions.github.io/preview/index.html#services" class="active">Services</a>
                         <div class="mega-menu">
                             <div class="container mega-menu-inner">
@@ -664,6 +698,24 @@
                     mainNav.classList.toggle('active');
                 });
             }
+            
+            // --- NEW FEATURE: Mobile Mega Menu Logic ---
+            const servicesLi = document.getElementById('servicesDropdown');
+            const servicesLink = servicesLi ? servicesLi.querySelector('a') : null;
+
+            if (servicesLi && servicesLink) {
+                servicesLink.addEventListener('click', function(e) {
+                    // Check if we are in mobile view (matches CSS breakpoint)
+                    if (window.innerWidth <= 992) {
+                        // If the dropdown is NOT active, prevent default navigation and show the menu
+                        if (!servicesLi.classList.contains('dropdown-active')) {
+                            e.preventDefault();
+                            servicesLi.classList.add('dropdown-active');
+                        } 
+                        // Else: if it IS active, the default behavior (navigation) occurs on this second click
+                    }
+                });
+            }
 
             // --- Scroll to Top Button ---
             const scrollToTopBtn = document.getElementById('scrollToTop');
@@ -721,4 +773,3 @@
     </script>
 </body>
 </html>
-
