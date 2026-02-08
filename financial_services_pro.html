@@ -1,1 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIG Global Solutions - Financial Services Infographic</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS Variables (Adapted to First Script's Palette) --- */
+        :root {
+            /* Palette from First Script */
+            --primary-color: #003F5C;   /* Deep Blue */
+            --secondary-color: #366E8A; /* Medium Blue */
+            --accent-color: #7CB5D3;    /* Light Blue */
+            --light-color: #C2E7FF;     /* Pale Blue */
+            --white: #FFFFFF;
+            
+            /* Structural variables */
+            --shadow-light: 0 4px 15px rgba(0, 63, 92, 0.08);
+            --shadow-medium: 0 8px 25px rgba(0, 63, 92, 0.12);
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Chart Styles --- */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 384px;
+            }
+        }
+
+        /* --- Header & Navigation CSS --- */
+        .main-header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+        }
+        .main-header.scrolled { box-shadow: var(--shadow-medium); }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;}
+        
+        .brand { display: flex; align-items: center; text-decoration: none; }
+        .brand .logo { width: 55px; height: 55px; margin-right: 15px; object-fit: contain; }
+        .brand-text h4 { margin: 0; font-size: 1.5rem; color: var(--primary-color); font-weight: 700; line-height: 1.2;}
+        .brand-text p { margin: 0; font-size: 0.85rem; color: var(--secondary-color); }
+
+        /* Navigation & Mega Menu */
+        .main-nav ul { list-style: none; display: flex; align-items: center; padding: 0; margin: 0;}
+        .main-nav ul li { margin-left: 35px; }
+        
+        .main-nav ul li a:not(.nav-btn) {
+            text-decoration: none; color: var(--primary-color); font-weight: 600;
+            padding: 20px 0; position: relative; transition: var(--transition-smooth);
+        }
+        .main-nav ul li a:not(.nav-btn)::after {
+            content: ''; position: absolute; bottom: 15px; left: 50%; width: 0; height: 2px;
+            background: var(--secondary-color); transition: all 0.3s ease; transform: translateX(-50%);
+        }
+        .main-nav ul li a:not(.nav-btn):hover::after, .main-nav ul li a:not(.nav-btn).active::after { width: 100%; }
+        .main-nav ul li a:not(.nav-btn):hover, .main-nav ul li a:not(.nav-btn).active { color: var(--secondary-color); }
+
+        .nav-btn {
+            padding: 10px 25px;
+            background: var(--primary-color);
+            color: white !important;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 63, 92, 0.3);
+            transition: var(--transition-smooth);
+        }
+        .nav-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(54, 110, 138, 0.4);
+        }
+
+        .has-megamenu { position: static; }
+        .mega-menu {
+            position: absolute; top: 100%; left: 0; width: 100%; background: var(--white);
+            box-shadow: var(--shadow-medium); border-top: 3px solid var(--primary-color); padding: 40px 0;
+            opacity: 0; visibility: hidden; transform: translateY(20px); transition: var(--transition-smooth);
+        }
+        @media (min-width: 993px) {
+            .has-megamenu:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        }
+        .mega-menu-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; padding: 0 20px;}
+        .mega-menu-col .category {
+            font-weight: 700; font-size: 1.1rem; text-transform: uppercase; color: var(--primary-color);
+            padding-bottom: 15px; margin-bottom: 20px; border-bottom: 2px solid var(--light-color);
+        }
+        .mega-menu-col ul { display: block; }
+        .mega-menu-col ul li { margin: 0 0 15px 0; }
+        .mega-menu-col ul li a {
+            font-weight: 400; padding: 8px 15px; display: block;
+            transition: var(--transition-smooth); border-left: 3px solid transparent; border-radius: 4px;
+        }
+        .mega-menu-col ul li a:hover {
+            color: var(--primary-color); border-left-color: var(--secondary-color);
+            background: rgba(0, 63, 92, 0.05); transform: translateX(5px);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle { display: none; cursor: pointer; flex-direction: column;}
+        .mobile-menu-toggle span {
+            display: block; width: 25px; height: 3px; background: var(--primary-color);
+            margin: 4px 0; transition: var(--transition-smooth); border-radius: 2px;
+        }
+        .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+        /* --- Footer Styles --- */
+        .main-footer {
+            background: var(--primary-color);
+            color: var(--white); padding: 80px 0 30px; 
+            margin-top: 0; /* Handled by structure */
+        }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; margin-bottom: 50px; max-width: 1200px; margin: 0 auto 50px auto; padding: 0 20px; }
+        .footer-col .footer-brand { display: flex; align-items: center; margin-bottom: 20px; }
+        .footer-col .logo { width: 60px; height: 60px; margin-right: 15px; }
+        .footer-col h4.col-title {
+            margin-bottom: 25px; font-size: 1.3rem; color: var(--light-color);
+        }
+        .footer-col h4.col-title::after { content: ''; width: 30px; height: 2px; background: var(--secondary-color); display: block; margin-top: 10px; }
+        .footer-col ul { list-style: none; padding: 0;}
+        .footer-col ul li { margin-bottom: 12px; color: rgba(255,255,255,0.8); display: flex; align-items: center; }
+        .footer-col ul li svg { width: 16px; height: 16px; margin-right: 10px; fill: currentColor; }
+        .footer-col ul li a { color: rgba(255,255,255,0.8); text-decoration: none; transition: var(--transition-smooth); }
+        .footer-col ul li a:hover { color: var(--light-color); }
+        .social-links a {
+            color: var(--white); margin-right: 15px; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: inline-block;
+        }
+        .social-links svg { width: 24px; height: 24px; fill: currentColor; }
+        .social-links a:hover { color: var(--light-color); transform: translateY(-3px) scale(1.2); }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+
+        /* --- Flowchart Styles (From Orig) --- */
+        .flowchart-step {
+            position: relative;
+            padding: 1rem;
+            border: 2px solid var(--accent-color);
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        /* --- Final CTA Section Styles --- */
+        .final-cta {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            text-align: center;
+            margin-top: auto; 
+            position: relative;
+        }
+        .final-cta h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .final-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--light-color);
+        }
+        .btn-cta {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: var(--light-color);
+        }
+        @keyframes pulse-btn {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+        .btn-pulse { animation: pulse-btn 2s infinite; }
+
+        /* --- Responsive Queries --- */
+        @media (max-width: 992px) {
+            .mobile-menu-toggle { display: flex; }
+            .main-nav {
+                display: none; position: absolute; top: 100%; left: 0; width: 100%;
+                background: var(--white); box-shadow: var(--shadow-medium); padding: 20px 0;
+            }
+            .main-nav.active { display: block; }
+            .main-nav ul { flex-direction: column; text-align: center; }
+            .main-nav ul li { margin: 15px 0; }
+            
+            .nav-btn { display: inline-block; margin-top: 10px; }
+            
+            .has-megamenu .mega-menu { 
+                display: none; position: static; opacity: 1; visibility: visible; 
+                transform: none; box-shadow: none; border-top: none; padding: 10px 0; background-color: #fcfcfc;
+            }
+            .has-megamenu.dropdown-active .mega-menu { display: block; }
+            .mega-menu-inner { display: flex; flex-direction: column; gap: 20px; padding: 0 30px; text-align: left; }
+            .mega-menu-col .category { font-size: 1rem; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #eee; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .final-cta h2 { font-size: 1.75rem; }
+        }
+    </style>
+</head>
+<body class="text-[#003F5C]">
+
+    <!-- Header (From New Script) -->
+    <header class="main-header" id="mainHeader">
+        <div class="container">
+            <a href="https://rig-global-solutions.github.io/preview/" class="brand">
+                <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="RIG Global Solutions Logo" class="logo">
+                <div class="brand-text">
+                    <h4>RIG Global Solutions</h4>
+                    <p>Financial Services</p>
+                </div>
+            </a>
+            
+            <div class="mobile-menu-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li class="has-megamenu">
+                        <a href="#services">Services</a>
+                        <div class="mega-menu">
+                            <div class="container mega-menu-inner">
+                                <div class="mega-menu-col">
+                                    <h4 class="category">Financial Solutions</h4>
+                                    <ul>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/financial_services_starter.html">Starter</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/financial_services_growth.html">Growth</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/financial_services_pro.html">Pro</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="https://rig-global-solutions.github.io/preview/show_your_interest_page.html" class="nav-btn">Get Started</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Original Content with Original Header removed/adapted -->
+    <header class="bg-[#003F5C] text-white p-8 text-center md:py-20">
+        <h1 class="text-4xl md:text-5xl font-bold">Empowering Growth: Your Financial Backbone</h1>
+        <p class="text-lg md:text-xl mt-4 text-[#C2E7FF] max-w-3xl mx-auto">Strategic Financial Services for Funded Startups & SMEs by RIG Global Solutions</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="challenge" class="text-center bg-white rounded-lg shadow-md p-8 mb-12">
+            <h2 class="text-3xl font-bold text-[#366E8A] mb-4">The Startup & SME Financial Tightrope</h2>
+            <p class="text-lg max-w-3xl mx-auto mb-6">Growing businesses face a critical challenge: balancing ambitious growth with robust financial management. Inefficient financial operations are a leading cause of failure for promising ventures.</p>
+            <div class="bg-[#C2E7FF] text-[#003F5C] p-6 rounded-lg inline-block">
+                <p class="text-5xl font-bold">70%</p>
+                <p class="text-xl">of SMEs cite cash flow management as their biggest financial challenge.</p>
+            </div>
+        </section>
+
+        <section id="services" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#366E8A] mb-8">An Integrated Financial Ecosystem</h2>
+            <p class="text-lg text-center max-w-4xl mx-auto mb-10">RIG Global Solutions provides a comprehensive suite of services designed to function as your complete, outsourced finance department.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold mb-4">Business Financial Services</h3>
+                    <p class="mb-4">This forms the bedrock of your financial operations, ensuring compliance, accuracy, and clarity in your daily financial activities.</p>
+                    <div class="chart-container h-64">
+                        <canvas id="businessServicesChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold mb-4">Virtual CFO Services</h3>
+                    <p class="mb-4">Get C-suite financial expertise and strategic guidance without the overhead of a full-time executive.</p>
+                     <div class="chart-container h-64">
+                        <canvas id="cfoComparisonChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold mb-4">Startup Funding & Valuation</h3>
+                    <p class="mb-4">Navigating the funding landscape is critical. We guide startups through each stage, from valuation to securing capital.</p>
+                    <div class="chart-container h-64">
+                        <canvas id="fundingStagesChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold mb-4">Project Finance & Feasibility</h3>
+                    <p class="mb-4">Before committing capital to new projects, a rigorous feasibility analysis is essential. We assess viability to ensure your investments are sound.</p>
+                    <ul class="space-y-3 text-left list-disc list-inside mt-6">
+                        <li><strong>Market Analysis:</strong> Identifying demand & competition.</li>
+                        <li><strong>Technical Assessment:</strong> Evaluating resources & infrastructure.</li>
+                        <li><strong>Financial Modeling:</strong> Projecting costs, revenues, and ROI.</li>
+                        <li><strong>Risk Evaluation:</strong> Pinpointing potential challenges.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold mb-4">Advanced Financial Analysis</h3>
+                    <p class="mb-4">Go beyond basic reports. We provide deep-dive analysis to uncover insights and optimize performance.</p>
+                     <div class="chart-container h-64">
+                        <canvas id="financialAnalysisChart"></canvas>
+                    </div>
+                </div>
+
+                 <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center text-center">
+                    <h3 class="text-2xl font-bold mb-4">Your Strategic Partner</h3>
+                    <p class="text-6xl mb-4">📈</p>
+                    <p class="text-lg">Our goal is to move beyond service provision to become a core part of your strategic team.</p>
+                    <div class="mt-4 bg-[#003F5C] text-white p-4 rounded-lg w-full">
+                        <p class="text-md">Starting at</p>
+                        <p class="text-2xl font-bold">₹24,999.00 INR</p>
+                        <p class="text-sm">per month (variable)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="sop" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#366E8A] mb-8">Our Client Journey: From Onboarding to Growth</h2>
+            <p class="text-lg text-center max-w-4xl mx-auto mb-10">We follow a structured and transparent process to ensure seamless integration with your team.</p>
+             <div class="relative flex flex-col items-center space-y-12 md:space-y-0 md:flex-row md:justify-between md:space-x-4">
+                <div class="flowchart-step w-full md:w-1/5">
+                    <div class="text-2xl font-bold text-[#003F5C]">1</div>
+                    <h4 class="font-semibold mt-2">Discovery & Onboarding</h4>
+                    <p class="text-sm">Understanding your business, goals, and existing financial systems.</p>
+                </div>
+                <div class="hidden md:block text-4xl text-[#366E8A] font-light">&rarr;</div>
+                 <div class="md:hidden text-4xl text-[#366E8A] font-light">&darr;</div>
+                <div class="flowchart-step w-full md:w-1/5">
+                    <div class="text-2xl font-bold text-[#003F5C]">2</div>
+                    <h4 class="font-semibold mt-2">System Setup & Integration</h4>
+                    <p class="text-sm">Implementing tools and processes for data collection and bookkeeping.</p>
+                </div>
+                <div class="hidden md:block text-4xl text-[#366E8A] font-light">&rarr;</div>
+                <div class="md:hidden text-4xl text-[#366E8A] font-light">&darr;</div>
+                <div class="flowchart-step w-full md:w-1/5">
+                    <div class="text-2xl font-bold text-[#003F5C]">3</div>
+                    <h4 class="font-semibold mt-2">Execution & Reporting</h4>
+                    <p class="text-sm">Managing daily finances and delivering monthly reports and insights.</p>
+                </div>
+                <div class="hidden md:block text-4xl text-[#366E8A] font-light">&rarr;</div>
+                <div class="md:hidden text-4xl text-[#366E8A] font-light">&darr;</div>
+                <div class="flowchart-step w-full md:w-1/5">
+                    <div class="text-2xl font-bold text-[#003F5C]">4</div>
+                    <h4 class="font-semibold mt-2">Strategic Review</h4>
+                    <p class="text-sm">Quarterly meetings to discuss performance, forecasts, and strategic advice.</p>
+                </div>
+                 <div class="hidden md:block text-4xl text-[#366E8A] font-light">&rarr;</div>
+                 <div class="md:hidden text-4xl text-[#366E8A] font-light">&darr;</div>
+                 <div class="flowchart-step w-full md:w-1/5">
+                    <div class="text-2xl font-bold text-[#003F5C]">5</div>
+                    <h4 class="font-semibold mt-2">Follow-up & Optimization</h4>
+                    <p class="text-sm">Continuous process improvement and proactive support.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="case-study" class="bg-white rounded-lg shadow-md p-8 mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#366E8A] mb-8">Hypothetical Case Study: "ScaleUp Tech"</h2>
+            <p class="text-lg text-center max-w-4xl mx-auto mb-10">ScaleUp Tech, a promising SaaS startup, struggled with cash flow forecasting and investor reporting. After partnering with RIG Global Solutions, they transformed their financial operations.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Key Outcomes:</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-green-500 text-2xl mr-3">&#10004;</span>
+                            <div>
+                                <h4 class="font-semibold">300% Revenue Growth</h4>
+                                <p class="text-gray-600">Enabled by data-driven strategic decisions and optimized pricing models over 24 months.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 text-2xl mr-3">&#10004;</span>
+                            <div>
+                                <h4 class="font-semibold">25% Reduction in Operating Costs</h4>
+                                <p class="text-gray-600">Achieved through detailed expense analysis and vendor negotiation.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 text-2xl mr-3">&#10004;</span>
+                            <div>
+                                <h4 class="font-semibold">Successful Series A Funding</h4>
+                                <p class="text-gray-600">Secured funding with a robust financial model, accurate valuation, and professional investor reports.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chart-container">
+                    <canvas id="caseStudyChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Final CTA Section (Added & Styled to match) -->
+    <section class="final-cta">
+        <div class="container mx-auto px-4">
+            <h2>Ready to Build a Stronger Financial Future?</h2>
+            <p>Let's discuss how RIG Global Solutions can tailor a financial services package for your unique business needs.</p>
+            <a href="https://rig-global-solutions.github.io/preview/show_your_interest_page.html" class="btn-cta btn-pulse">Get a Free Consultation</a>
+        </div>
+    </section>
+    
+    <!-- Footer (From New Script, Styled) -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">
+                        <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="RIG Global Solutions Logo" class="logo">
+                        <div class="brand-text">
+                            <h4 style="color: white; margin: 0; font-size: 1.2rem; font-weight: 700;">RIG Global Solutions</h4>
+                            <p style="color: rgba(255,255,255,0.7); margin: 0; font-size: 0.8rem;">Empowering Solutions- Strategically, Sustainably & Globally</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/1B8PLqLGoU/" target="_blank" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0C157.8 0 105.22 45.96 105.22 132.28v65.7H32.01V288h73.21v224h92.57V288z"/></svg></a>
+                        <a href="https://www.instagram.com/rig_global?igsh=dHphaWdpemUydGZl" target="_blank" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9 26.3 26.2 58 34.4 93.9 36.2 37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+                        <a href="https://www.linkedin.com/company/rig-global-solutions/" target="_blank" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg></a>
+                        <a href="https://wa.me/c/918617715655" target="_blank" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 class="col-title">Contact Info</h4>
+                    <ul>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>Address: WB, India- 721601</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 256h64c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>GSTIN: 19BGKPR8647B1ZX</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg>+91 8617715655</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112v288c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm0 48h416v54.4c-22.1 16.2-50.6 37.1-84.8 62.4c-25.2 18.5-52.6 35.8-82.9 50.4L256 339.1l-35.4-15.1c-30.4-14.6-57.7-31.9-82.9-50.4C22.6 202.5 50.1 181.6 72.2 166.4H48V112zM48 212.2V400h416V212.2c-22.5 15.5-48.1 33.6-76.3 53.3c-27.4 19.1-55.9 37-86.4 51.9l-19.5 9.8L256 339.1l-19.5-9.8c-30.5-14.9-59-32.8-86.4-51.9C104.1 245.8 78.5 227.7 56 212.2H48z"/></svg>info@rigfinancialservices.com</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="col-title">Quick Links</h4>
+                      <ul>
+                           <li><a href="#">About Us</a></li>
+                           <li><a href="#services">Services</a></li>
+                           <li><a href="#">Privacy Policy</a></li>
+                           <li><a href="#">Terms of Service</a></li>
+                      </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 RIG Global Solutions. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const brilliantBluesPalette = {
+            primary: '#003F5C',
+            secondary: '#366E8A',
+            accent: '#7CB5D3',
+            light: '#C2E7FF',
+            white: '#FFFFFF'
+        };
+
+        const chartTooltipOptions = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        function wrapLabels(label, maxLength = 16) {
+            if (label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+
+        const businessServicesCtx = document.getElementById('businessServicesChart').getContext('2d');
+        new Chart(businessServicesCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Accounting & Bookkeeping', 'Business Taxation (GST, IT)', 'Financial Analysis & Reporting'],
+                datasets: [{
+                    label: 'Service Focus',
+                    data: [45, 35, 20],
+                    backgroundColor: [brilliantBluesPalette.secondary, brilliantBluesPalette.accent, brilliantBluesPalette.primary],
+                    borderColor: brilliantBluesPalette.white,
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    ...chartTooltipOptions.plugins,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: brilliantBluesPalette.primary
+                        }
+                    }
+                }
+            }
+        });
+
+        const cfoComparisonCtx = document.getElementById('cfoComparisonChart').getContext('2d');
+        const cfoLabels = ['Annual Cost', 'Strategic Input', 'Scalability'];
+        new Chart(cfoComparisonCtx, {
+            type: 'bar',
+            data: {
+                labels: cfoLabels.map(l => wrapLabels(l)),
+                datasets: [{
+                    label: 'Full-Time CFO',
+                    data: [100, 90, 60],
+                    backgroundColor: brilliantBluesPalette.secondary,
+                    borderColor: brilliantBluesPalette.secondary,
+                    borderWidth: 1
+                }, {
+                    label: 'RIG Virtual CFO',
+                    data: [25, 85, 95],
+                    backgroundColor: brilliantBluesPalette.accent,
+                    borderColor: brilliantBluesPalette.accent,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                           callback: function(value) {
+                                return value + '%'
+                            },
+                           color: brilliantBluesPalette.primary
+                        }
+                    },
+                    x: {
+                        ticks: { color: brilliantBluesPalette.primary }
+                    }
+                },
+                plugins: {
+                     ...chartTooltipOptions.plugins,
+                    legend: {
+                         position: 'bottom',
+                         labels: {
+                            color: brilliantBluesPalette.primary
+                        }
+                    }
+                }
+            }
+        });
+        
+        const fundingStagesCtx = document.getElementById('fundingStagesChart').getContext('2d');
+        const fundingLabels = ['Pre-Seed/Seed', 'Series A', 'Series B', 'Series C+'];
+        new Chart(fundingStagesCtx, {
+            type: 'bar',
+            data: {
+                labels: fundingLabels.map(l => wrapLabels(l)),
+                datasets: [{
+                    label: 'Typical Valuation (INR Cr)',
+                    data: [5, 50, 200, 750],
+                    backgroundColor: [brilliantBluesPalette.primary, brilliantBluesPalette.secondary, brilliantBluesPalette.accent, brilliantBluesPalette.light],
+                    borderColor: brilliantBluesPalette.primary,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { color: brilliantBluesPalette.primary }
+                    },
+                    y: {
+                        ticks: { color: brilliantBluesPalette.primary }
+                    }
+                },
+                plugins: {
+                    ...chartTooltipOptions.plugins,
+                    legend: { display: false }
+                }
+            }
+        });
+
+
+        const financialAnalysisCtx = document.getElementById('financialAnalysisChart').getContext('2d');
+        new Chart(financialAnalysisCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Profitability', 'Liquidity', 'Solvency', 'Efficiency', 'Market Standing'],
+                datasets: [{
+                    label: 'Company Health Score',
+                    data: [85, 70, 90, 80, 75],
+                    backgroundColor: 'rgba(54, 110, 138, 0.2)',
+                    borderColor: brilliantBluesPalette.secondary,
+                    pointBackgroundColor: brilliantBluesPalette.secondary,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: brilliantBluesPalette.secondary
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                 plugins: {
+                     ...chartTooltipOptions.plugins,
+                    legend: {
+                         position: 'bottom',
+                         labels: {
+                            color: brilliantBluesPalette.primary
+                        }
+                    }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: '#ddd' },
+                        grid: { color: '#ddd' },
+                        pointLabels: { color: brilliantBluesPalette.primary, font: {size: 11} },
+                        ticks: {
+                            backdropColor: 'transparent',
+                            color: brilliantBluesPalette.secondary,
+                        }
+                    }
+                }
+            }
+        });
+
+        const caseStudyCtx = document.getElementById('caseStudyChart').getContext('2d');
+        const caseStudyLabels = ['Q1 \'23', 'Q2 \'23', 'Q3 \'23', 'Q4 \'23', 'Q1 \'24', 'Q2 \'24', 'Q3 \'24', 'Q4 \'24'];
+        new Chart(caseStudyCtx, {
+            type: 'line',
+            data: {
+                labels: caseStudyLabels,
+                datasets: [{
+                    label: 'Revenue Growth (INR Lakhs)',
+                    data: [20, 25, 40, 55, 60, 75, 85, 100],
+                    fill: true,
+                    borderColor: brilliantBluesPalette.secondary,
+                    backgroundColor: 'rgba(124, 181, 211, 0.2)',
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                 scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: brilliantBluesPalette.primary }
+                    },
+                    x: {
+                        ticks: { color: brilliantBluesPalette.primary }
+                    }
+                },
+                plugins: {
+                    ...chartTooltipOptions.plugins,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                           color: brilliantBluesPalette.primary
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- Header Scroll Effect & Mobile Menu (From New Script) ---
+        document.addEventListener('DOMContentLoaded', function () {
+            const header = document.getElementById('mainHeader');
+            if (header) {
+                window.addEventListener('scroll', function() {
+                    header.classList.toggle('scrolled', window.scrollY > 50);
+                });
+            }
+
+            const mobileToggle = document.getElementById('mobileToggle');
+            const mainNav = document.getElementById('mainNav');
+            if (mobileToggle && mainNav) {
+                mobileToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    mainNav.classList.toggle('active');
+                });
+            }
+            
+            // Mega Menu Mobile Logic
+            const menuItemsWithChildren = document.querySelectorAll('.has-megamenu > a');
+            menuItemsWithChildren.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 992) {
+                        e.preventDefault();
+                        const parent = this.parentElement;
+                        parent.classList.toggle('dropdown-active');
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
