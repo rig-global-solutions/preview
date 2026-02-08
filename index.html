@@ -211,7 +211,11 @@
             transform: translateY(20px);
             transition: var(--transition-smooth);
         }
-        .has-megamenu:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        /* Desktop Hover Effect */
+        @media (min-width: 993px) {
+            .has-megamenu:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        }
+        
         .mega-menu-inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
         .mega-menu-col .category {
             font-weight: 700;
@@ -628,7 +632,23 @@
             .main-nav ul { flex-direction: column; text-align: center; }
             .main-nav ul li { margin: 15px 0; }
             .mobile-menu-toggle { display: flex; flex-direction: column; }
-            .has-megamenu .mega-menu { display: none !important; }
+            
+            /* --- MODIFIED MOBILE MENU LOGIC --- */
+            /* Default hidden state */
+            .has-megamenu .mega-menu { display: none; } 
+            
+            /* Active state toggled via JS */
+            .has-megamenu.dropdown-active .mega-menu { 
+                display: block; 
+                position: static; 
+                opacity: 1; 
+                visibility: visible; 
+                transform: translateY(0); 
+                box-shadow: none;
+                border-top: none;
+                padding-top: 10px;
+            }
+            .mega-menu-inner { grid-template-columns: 1fr; gap: 20px; padding: 0 20px;}
         }
 
         @media (max-width: 768px) {
@@ -667,7 +687,8 @@
                 <ul>
                     <li><a href="https://rig-global-solutions.github.io/preview/" class="active">Home</a></li>
                     <li><a href="sarathi.html">Sarathi</a></li>
-                    <li class="has-megamenu">
+                    <!-- Added ID for easier selection in JS -->
+                    <li class="has-megamenu" id="servicesDropdown">
                         <a href="#services">Services</a>
                         <div class="mega-menu">
                             <div class="container mega-menu-inner">
@@ -974,6 +995,21 @@
                 });
             }
 
+            // --- NEW FUNCTIONALITY: Mobile Services Dropdown Toggle ---
+            const servicesDropdown = document.getElementById('servicesDropdown');
+            if (servicesDropdown) {
+                // Find the link inside
+                const link = servicesDropdown.querySelector('a');
+                
+                link.addEventListener('click', function(e) {
+                    // Check if we are in mobile view (width < 992px)
+                    if (window.innerWidth <= 992) {
+                        e.preventDefault(); // Prevent jumping to #services immediately
+                        servicesDropdown.classList.toggle('dropdown-active');
+                    }
+                });
+            }
+
             // --- Enhanced Tabs Functionality ---
             const tabs = document.querySelectorAll('.tab-btn');
             const tabPanes = document.querySelectorAll('.tab-pane');
@@ -1045,7 +1081,7 @@
                 });
             }
 
-            // --- MODIFICATION START: Particle.js Initialization for Service Cards ---
+            // --- Service Cards Particle.js Initialization ---
             if (document.getElementById('service-particles')) {
                 particlesJS('service-particles', {
                     "particles": {
@@ -1078,7 +1114,6 @@
                     "retina_detect": true
                 });
             }
-            // --- MODIFICATION END ---
 
             // --- Scroll Animations ---
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
