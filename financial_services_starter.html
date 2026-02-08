@@ -8,42 +8,42 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CSS Variables --- */
+        /* --- Integrated CSS Variables (Unified Theme from Script B) --- */
         :root {
-            --primary-color: #0033A0;
-            --primary-dark: #002269;
-            --growth-color: #3E9B40;
-            --accent-color: #FFC425;
-            --dark-color: #333333;
+            /* Matched to Tailwind blue-600 for consistency */
+            --primary-color: #2563EB; 
+            --primary-dark: #1d4ed8;
+            --secondary-color: #0F172A; /* Slate 900 */
             --light-color: #ffffff;
-            --grey-bg: #F8F9FA;
-            --border-color: #dee2e6;
-            --shadow-light: 0 4px 15px rgba(0,0,0,0.08);
-            --shadow-medium: 0 8px 25px rgba(0,0,0,0.12);
-            --shadow-heavy: 0 15px 35px rgba(0,0,0,0.15);
-            --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --grey-bg: #F8FAFC;
+            --border-color: #e2e8f0;
+            --accent-color: #FFC425; /* Kept from Script A for buttons/highlights */
+            
+            /* Shadows */
+            --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* --- Base Styles --- */
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8fafc; /* slate-50 */
-            color: var(--dark-color);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--grey-bg);
+            color: #1e293b;
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* --- Header & Navigation CSS --- */
+        /* --- Header & Navigation CSS (From Script B) --- */
         .main-header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -53,143 +53,143 @@
             top: 0;
             z-index: 1000;
             transition: var(--transition-smooth);
+            border-bottom: 1px solid var(--border-color);
         }
         .main-header.scrolled { box-shadow: var(--shadow-medium); }
-        .main-header .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;}
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; max-width: 1280px; margin: 0 auto; padding: 0 24px;}
         
         .brand { display: flex; align-items: center; text-decoration: none; }
-        .brand .logo { width: 55px; height: 55px; margin-right: 15px; object-fit: contain; }
-        .brand-text h4 { margin: 0; font-size: 1.5rem; color: var(--primary-color); font-weight: 700; line-height: 1.2;}
-        .brand-text p { margin: 0; font-size: 0.85rem; color: var(--dark-color); opacity: 0.8; }
+        .brand .logo { width: 45px; height: 45px; margin-right: 12px; object-fit: contain; }
+        .brand-text h4 { margin: 0; font-size: 1.25rem; color: var(--secondary-color); font-weight: 800; line-height: 1.2; font-family: 'Poppins', sans-serif;}
+        .brand-text p { margin: 0; font-size: 0.75rem; color: #64748b; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600;}
 
-        /* Navigation & Mega Menu */
+        /* Navigation */
         .main-nav ul { list-style: none; display: flex; align-items: center; padding: 0; margin: 0;}
-        .main-nav ul li { margin-left: 35px; }
+        .main-nav ul li { margin-left: 30px; }
         
-        /* Standard Links */
         .main-nav ul li a:not(.nav-btn) {
-            text-decoration: none; color: var(--dark-color); font-weight: 600;
-            padding: 20px 0; position: relative; transition: var(--transition-smooth);
+            text-decoration: none; color: var(--secondary-color); font-weight: 600;
+            padding: 24px 0; position: relative; transition: var(--transition-smooth);
+            font-family: 'Poppins', sans-serif; font-size: 0.95rem;
         }
         .main-nav ul li a:not(.nav-btn)::after {
-            content: ''; position: absolute; bottom: 15px; left: 50%; width: 0; height: 2px;
-            background: var(--gradient-primary); transition: all 0.3s ease; transform: translateX(-50%);
+            content: ''; position: absolute; bottom: 18px; left: 0; width: 0; height: 2px;
+            background: var(--primary-color); transition: all 0.3s ease;
         }
         .main-nav ul li a:not(.nav-btn):hover::after, .main-nav ul li a:not(.nav-btn).active::after { width: 100%; }
-        .main-nav ul li a:not(.nav-btn):hover, .main-nav ul li a:not(.nav-btn).active { color: var(--primary-color); }
+        .main-nav ul li a:not(.nav-btn):hover { color: var(--primary-color); }
 
-        /* Get Started Button Style */
+        /* Button Style */
         .nav-btn {
-            padding: 10px 25px;
+            padding: 10px 24px;
             background: var(--primary-color);
             color: white !important;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            box-shadow: 0 4px 10px rgba(0, 51, 160, 0.3);
+            font-size: 0.9rem;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
             transition: var(--transition-smooth);
+            font-family: 'Poppins', sans-serif;
         }
         .nav-btn:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 51, 160, 0.4);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
         }
 
+        /* Mega Menu */
         .has-megamenu { position: static; }
         .mega-menu {
             position: absolute; top: 100%; left: 0; width: 100%; background: var(--light-color);
             box-shadow: var(--shadow-medium); border-top: 3px solid var(--primary-color); padding: 40px 0;
-            opacity: 0; visibility: hidden; transform: translateY(20px); transition: var(--transition-smooth);
+            opacity: 0; visibility: hidden; transform: translateY(10px); transition: var(--transition-smooth);
         }
         
         @media (min-width: 993px) {
             .has-megamenu:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
         }
         
-        .mega-menu-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; padding: 0 20px;}
+        .mega-menu-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1280px; margin: 0 auto; padding: 0 24px;}
         .mega-menu-col .category {
-            font-weight: 700; font-size: 1.1rem; text-transform: uppercase; color: var(--primary-color);
-            padding-bottom: 15px; margin-bottom: 20px; border-bottom: 2px solid var(--border-color);
+            font-weight: 700; font-size: 0.9rem; text-transform: uppercase; color: var(--primary-color);
+            padding-bottom: 12px; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); font-family: 'Poppins', sans-serif;
         }
         .mega-menu-col ul { display: block; }
-        .mega-menu-col ul li { margin: 0 0 15px 0; }
+        .mega-menu-col ul li { margin: 0 0 10px 0; margin-left: 0 !important; }
         .mega-menu-col ul li a {
-            font-weight: 400; padding: 8px 15px; display: block;
+            font-weight: 400; padding: 8px 12px !important; display: block;
             transition: var(--transition-smooth); border-left: 3px solid transparent; border-radius: 4px;
         }
         .mega-menu-col ul li a:hover {
-            color: var(--primary-color); border-left-color: var(--growth-color);
-            background: rgba(0, 51, 160, 0.05); transform: translateX(5px);
+            color: var(--primary-color); border-left-color: var(--primary-color);
+            background: #eff6ff; transform: translateX(5px);
         }
 
         /* Mobile Menu Toggle */
         .mobile-menu-toggle { display: none; cursor: pointer; flex-direction: column;}
         .mobile-menu-toggle span {
-            display: block; width: 25px; height: 3px; background: var(--primary-color);
+            display: block; width: 25px; height: 3px; background: var(--secondary-color);
             margin: 4px 0; transition: var(--transition-smooth); border-radius: 2px;
         }
         .mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
         .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
         .mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
 
-        /* --- Footer Styles --- */
+        /* --- Footer Styles (From Script B) --- */
         .main-footer {
-            background: linear-gradient(135deg, var(--dark-color) 0%, #1a1a1a 100%);
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #020617 100%);
             color: var(--light-color); padding: 80px 0 30px; 
-            /* Margin handled by CTA section */
         }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; margin-bottom: 50px; max-width: 1200px; margin: 0 auto 50px auto; padding: 0 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 50px; max-width: 1280px; margin: 0 auto 50px auto; padding: 0 24px; }
         .footer-col .footer-brand { display: flex; align-items: center; margin-bottom: 20px; }
-        .footer-col .logo { width: 60px; height: 60px; margin-right: 15px; }
+        .footer-col .logo { width: 50px; height: 50px; margin-right: 15px; }
         .footer-col h4.col-title {
-            margin-bottom: 25px; font-size: 1.3rem; color: var(--light-color);
+            margin-bottom: 25px; font-size: 1.2rem; color: var(--light-color); font-family: 'Poppins', sans-serif; font-weight: 600;
         }
-        .footer-col h4.col-title::after { content: ''; width: 30px; height: 2px; background: var(--accent-color); display: block; margin-top: 10px; }
+        .footer-col h4.col-title::after { content: ''; width: 40px; height: 3px; background: var(--primary-color); display: block; margin-top: 10px; border-radius: 2px;}
         .footer-col ul { list-style: none; padding: 0;}
-        .footer-col ul li { margin-bottom: 12px; color: rgba(255,255,255,0.8); display: flex; align-items: center; }
-        .footer-col ul li svg { width: 16px; height: 16px; margin-right: 10px; fill: currentColor; }
-        .footer-col ul li a { color: rgba(255,255,255,0.8); text-decoration: none; transition: var(--transition-smooth); }
-        .footer-col ul li a:hover { color: var(--accent-color); }
+        .footer-col ul li { margin-bottom: 12px; color: #94a3b8; display: flex; align-items: center; }
+        .footer-col ul li svg { width: 18px; height: 18px; margin-right: 12px; fill: currentColor; }
+        .footer-col ul li a { color: #94a3b8; text-decoration: none; transition: var(--transition-smooth); }
+        .footer-col ul li a:hover { color: white; }
         .social-links a {
-            color: var(--light-color); margin-right: 15px; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            color: #94a3b8; margin-right: 15px; transition: all 0.3s ease;
             display: inline-block;
         }
-        .social-links svg { width: 24px; height: 24px; fill: currentColor; }
-        .social-links a:hover { color: var(--accent-color); transform: translateY(-3px) scale(1.2); }
-        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+        .social-links svg { width: 22px; height: 22px; fill: currentColor; }
+        .social-links a:hover { color: white; transform: translateY(-3px); }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #64748b; }
 
-        /* --- Blueprint Specific Styles --- */
+        /* --- Blueprint Specific Styles (Preserved from Script A but modernized) --- */
         .section-card {
             background-color: white;
-            border-radius: 0.75rem;
+            border-radius: 1rem; /* More rounded */
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             transition: all 0.3s ease-in-out;
+            border: 1px solid var(--border-color);
         }
         .section-card:hover {
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            transform: translateY(-4px);
         }
-        .sop-phase { border-left: 4px solid #3b82f6; }
-        .accordion-content {
-            max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out;
-        }
-        .accordion-button.active + .accordion-content { max-height: 2000px; }
-        
-        .case-study-highlight { background-color: #eef2ff; border-left: 4px solid #4f46e5; }
+        .sop-phase { border-left: 4px solid var(--primary-color); }
+        .case-study-highlight { background-color: #f0f9ff; border-left: 4px solid var(--primary-color); }
 
         /* --- Final CTA Section Styles --- */
         .final-cta {
             padding: 80px 20px;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             color: white;
             text-align: center;
-            margin-top: auto; /* Push to bottom if content is short */
+            margin-top: auto; 
             position: relative;
         }
         .final-cta h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
         }
         .final-cta p {
             font-size: 1.1rem;
@@ -200,37 +200,29 @@
             margin-right: auto;
         }
         
-        /* General Button Styles */
-        .btn {
+        /* Pulse Button */
+        .btn-pulse {
             display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: var(--transition-smooth);
-            border: none;
-            cursor: pointer;
-            text-align: center;
-        }
-        .btn-primary {
-            background: var(--accent-color);
+            padding: 14px 35px;
+            background: white;
             color: var(--primary-color);
-            box-shadow: 0 4px 15px rgba(255, 196, 37, 0.4);
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition-smooth);
+            animation: pulse-btn 2s infinite;
         }
-        .btn-primary:hover {
+        .btn-pulse:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 196, 37, 0.6);
-            background: #ffcf4b;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            background: #f8fafc;
         }
-        
-        /* Pulse Animation */
         @keyframes pulse-btn {
-            0% { box-shadow: 0 0 0 0 rgba(255, 196, 37, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 196, 37, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 196, 37, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
         }
-        .btn-pulse { animation: pulse-btn 2s infinite; }
-
 
         /* --- Loading Overlay --- */
         .loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--light-color); display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease; }
@@ -247,9 +239,8 @@
             }
             .main-nav.active { display: block; }
             .main-nav ul { flex-direction: column; text-align: center; }
-            .main-nav ul li { margin: 15px 0; }
+            .main-nav ul li { margin: 15px 0; margin-left: 0; }
             
-            /* Mobile adjustments for nav button */
             .nav-btn { display: inline-block; margin-top: 10px; }
             
             .has-megamenu .mega-menu { 
@@ -260,7 +251,6 @@
             .mega-menu-inner { display: flex; flex-direction: column; gap: 20px; padding: 0 30px; text-align: left; }
             .mega-menu-col .category { font-size: 1rem; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #eee; }
             .footer-grid { grid-template-columns: 1fr; }
-            
             .final-cta h2 { font-size: 1.75rem; }
         }
     </style>
@@ -271,11 +261,11 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Header -->
+    <!-- Header (Structure from Script B) -->
     <header class="main-header" id="mainHeader">
         <div class="container">
             <a href="https://rig-global-solutions.github.io/preview/" class="brand">
-                <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="RIG Global Solutions Logo" class="logo">
+                <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="RIG Global Solutions Logo" class="logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
                 <div class="brand-text">
                     <h4>RIG Global Solutions</h4>
                     <p>Internal Operational Blueprint</p>
@@ -291,7 +281,7 @@
             <nav class="main-nav" id="mainNav">
                 <ul>
                     <li><a href="https://rig-global-solutions.github.io/preview/finance_page.html">Home</a></li>
-                    <!-- Services Mega Menu -->
+                    <!-- Services Mega Menu (Structure from Script B) -->
                     <li class="has-megamenu">
                         <a href="#services" class="active">Services</a>
                         <div class="mega-menu">
@@ -316,8 +306,8 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 py-8 md:py-12" style="max-width: 1200px;">
+    <!-- Main Content (Content from Script A) -->
+    <main class="container mx-auto px-4 sm:px-6 py-12 max-w-7xl">
 
         <!-- Page Title Section -->
         <section class="text-center mb-12">
@@ -328,7 +318,7 @@
         <!-- Package Overview Section -->
         <section id="overview" class="section-card p-6 md:p-8 mb-12">
             <h3 class="text-2xl font-bold mb-4 flex items-center">
-                <svg class="h-6 w-6 mr-3 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <svg class="h-6 w-6 mr-3 text-blue-500" style="color: var(--primary-color);" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
                 </svg>
@@ -354,19 +344,18 @@
         <!-- Services Details Section -->
         <section id="services-details" class="section-card p-6 md:p-8 mb-12">
             <h3 class="text-2xl font-bold mb-6 flex items-center">
-                <svg class="h-6 w-6 mr-3 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <svg class="h-6 w-6 mr-3 text-blue-500" style="color: var(--primary-color);" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 Included Service Details
             </h3>
             
-            <!-- SWITCHED FROM ACCORDION TO GRID FOR BETTER SPACE USAGE -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 <!-- Service Item 1 -->
                 <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300">
                     <div class="flex items-start mb-4">
-                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0">
+                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0" style="color: var(--primary-color);">
                             <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
                         </div>
                         <div>
@@ -377,10 +366,10 @@
                     <div class="pl-0 md:pl-16">
                         <p class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-2">Key Deliverables:</p>
                         <ul class="space-y-2 text-slate-600">
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Personalized Financial Plan Document</li>
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Goal Analysis and Prioritization Report</li>
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Basic Investment Strategy Suggestion</li>
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Tax-saving Investment Recommendations</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Personalized Financial Plan Document</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Goal Analysis and Prioritization Report</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Basic Investment Strategy Suggestion</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Tax-saving Investment Recommendations</li>
                         </ul>
                     </div>
                 </div>
@@ -388,7 +377,7 @@
                 <!-- Service Item 2 -->
                 <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300">
                     <div class="flex items-start mb-4">
-                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0">
+                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0" style="color: var(--primary-color);">
                             <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
                         </div>
                         <div>
@@ -399,9 +388,9 @@
                     <div class="pl-0 md:pl-16">
                         <p class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-2">Key Deliverables:</p>
                         <ul class="space-y-2 text-slate-600">
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Retirement Corpus Calculation Report</li>
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Analysis of existing accounts (EPF, PPF)</li>
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>NPS & retirement-focused recommendations</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Retirement Corpus Calculation Report</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Analysis of existing accounts (EPF, PPF)</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>NPS & retirement-focused recommendations</li>
                         </ul>
                     </div>
                 </div>
@@ -409,7 +398,7 @@
                 <!-- Service Item 3 -->
                 <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300">
                     <div class="flex items-start mb-4">
-                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0">
+                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0" style="color: var(--primary-color);">
                             <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
                         </div>
                         <div>
@@ -420,9 +409,9 @@
                     <div class="pl-0 md:pl-16">
                         <p class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-2">Key Deliverables:</p>
                         <ul class="space-y-2 text-slate-600">
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Credit Score Analysis Report</li>
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Action plan for score improvement</li>
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Advisory on loan options (Home, Personal)</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Credit Score Analysis Report</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Action plan for score improvement</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Advisory on loan options (Home, Personal)</li>
                         </ul>
                     </div>
                 </div>
@@ -430,7 +419,7 @@
                  <!-- Service Item 4 -->
                  <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300">
                     <div class="flex items-start mb-4">
-                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0">
+                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0" style="color: var(--primary-color);">
                             <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>
                         </div>
                         <div>
@@ -441,9 +430,9 @@
                     <div class="pl-0 md:pl-16">
                         <p class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-2">Key Deliverables:</p>
                         <ul class="space-y-2 text-slate-600">
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Insurance Need Analysis (Life and Health)</li>
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Review of existing insurance policies</li>
-                            <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Recommendations for Term & Health plans</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Insurance Need Analysis (Life and Health)</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Review of existing insurance policies</li>
+                            <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Recommendations for Term & Health plans</li>
                         </ul>
                     </div>
                 </div>
@@ -451,7 +440,7 @@
                  <!-- Service Item 5 (Spans 2 columns on desktop) -->
                  <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 md:col-span-2">
                     <div class="flex items-start mb-4">
-                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0">
+                        <div class="p-2 bg-blue-100 rounded-lg text-blue-600 mr-4 shrink-0" style="color: var(--primary-color);">
                             <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         </div>
                         <div>
@@ -463,15 +452,15 @@
                         <div>
                             <p class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-2">Key Deliverables:</p>
                             <ul class="space-y-2 text-slate-600">
-                                <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Customized Monthly Budget Template</li>
-                                <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Analysis of spending patterns</li>
+                                <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Customized Monthly Budget Template</li>
+                                <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Analysis of spending patterns</li>
                             </ul>
                         </div>
                         <div>
                             <p class="font-semibold text-sm uppercase tracking-wider text-slate-400 mb-2 md:invisible">More:</p>
                              <ul class="space-y-2 text-slate-600">
-                                <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Strategies to increase savings rate</li>
-                                <li class="flex items-start"><span class="mr-2 text-blue-500">•</span>Guidance on using expense apps</li>
+                                <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Strategies to increase savings rate</li>
+                                <li class="flex items-start"><span class="mr-2 text-blue-500" style="color: var(--primary-color);">•</span>Guidance on using expense apps</li>
                             </ul>
                         </div>
                     </div>
@@ -482,19 +471,19 @@
         <!-- SOP Section -->
         <section id="sop" class="section-card p-6 md:p-8 mb-12">
             <h3 class="text-2xl font-bold mb-8 flex items-center">
-                 <svg class="h-6 w-6 mr-3 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                 <svg class="h-6 w-6 mr-3 text-blue-500" style="color: var(--primary-color);" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
                 </svg>
                 Standard Operating Procedure (SOP)
             </h3>
             
             <!-- Vertical Timeline Container -->
-            <div class="relative border-l-4 border-blue-600 ml-4 md:ml-6 space-y-12">
+            <div class="relative border-l-4 border-blue-600 ml-4 md:ml-6 space-y-12" style="border-color: var(--primary-color);">
                 
                 <!-- Phase 1: Onboarding -->
                 <div class="relative pl-8">
                     <!-- Marker -->
-                    <span class="absolute -left-[22px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white border-4 border-white font-bold text-lg shadow-sm">1</span>
+                    <span class="absolute -left-[22px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white border-4 border-white font-bold text-lg shadow-sm" style="background-color: var(--primary-color);">1</span>
                     
                     <h4 class="text-xl font-bold text-blue-900 mb-4 flex items-center">
                         Phase 1: Client Onboarding
@@ -503,22 +492,22 @@
                     
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600">Step 1</h5>
+                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600" style="color: var(--primary-color);">Step 1</h5>
                             <p class="font-semibold text-slate-800">Initial Consultation</p>
                             <p class="text-sm text-slate-600 mt-1">Qualify lead using "First Call Checklist". Explain Starter Package.</p>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                             <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600">Step 2</h5>
+                             <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600" style="color: var(--primary-color);">Step 2</h5>
                             <p class="font-semibold text-slate-800">Discovery Meeting</p>
                             <p class="text-sm text-slate-600 mt-1">Detailed data collection on income, expenses, assets, and goals.</p>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                             <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600">Step 3</h5>
+                             <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600" style="color: var(--primary-color);">Step 3</h5>
                             <p class="font-semibold text-slate-800">Proposal & Agreement</p>
                             <p class="text-sm text-slate-600 mt-1">Send proposal. Sign Service Agreement. Collect 1st month fee.</p>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                             <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600">Step 4</h5>
+                             <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600" style="color: var(--primary-color);">Step 4</h5>
                             <p class="font-semibold text-slate-800">Welcome Kit</p>
                             <p class="text-sm text-slate-600 mt-1">Send document checklist and grant portal access.</p>
                         </div>
@@ -528,7 +517,7 @@
                 <!-- Phase 2: Service Delivery -->
                 <div class="relative pl-8">
                     <!-- Marker -->
-                    <span class="absolute -left-[22px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white border-4 border-white font-bold text-lg shadow-sm">2</span>
+                    <span class="absolute -left-[22px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white border-4 border-white font-bold text-lg shadow-sm" style="background-color: var(--primary-color);">2</span>
                     
                     <h4 class="text-xl font-bold text-blue-900 mb-4 flex items-center">
                         Phase 2: Service Delivery
@@ -537,22 +526,22 @@
                     
                     <div class="grid md:grid-cols-2 gap-4">
                          <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600">Step 5</h5>
+                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600" style="color: var(--primary-color);">Step 5</h5>
                             <p class="font-semibold text-slate-800">Analysis & Planning</p>
                             <p class="text-sm text-slate-600 mt-1">Analyze cash flow/risk. Draft financial, retirement & insurance plans.</p>
                         </div>
                          <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600">Step 6</h5>
+                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600" style="color: var(--primary-color);">Step 6</h5>
                             <p class="font-semibold text-slate-800">Internal Review</p>
                             <p class="text-sm text-slate-600 mt-1">Peer review for accuracy and compliance with standards.</p>
                         </div>
                          <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600">Step 7</h5>
+                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600" style="color: var(--primary-color);">Step 7</h5>
                             <p class="font-semibold text-slate-800">Presentation Meeting</p>
                             <p class="text-sm text-slate-600 mt-1">Present "Financial Plan Deck". Explain findings & action steps.</p>
                         </div>
                          <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600">Step 8</h5>
+                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600" style="color: var(--primary-color);">Step 8</h5>
                             <p class="font-semibold text-slate-800">Implementation</p>
                             <p class="text-sm text-slate-600 mt-1">Assist with investment account setup, insurance forms, and budget tools.</p>
                         </div>
@@ -562,7 +551,7 @@
                 <!-- Phase 3: Follow-Up -->
                 <div class="relative pl-8">
                     <!-- Marker -->
-                    <span class="absolute -left-[22px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white border-4 border-white font-bold text-lg shadow-sm">3</span>
+                    <span class="absolute -left-[22px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white border-4 border-white font-bold text-lg shadow-sm" style="background-color: var(--primary-color);">3</span>
                     
                     <h4 class="text-xl font-bold text-blue-900 mb-4 flex items-center">
                         Phase 3: Recurring Follow-Up
@@ -571,17 +560,17 @@
                     
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600">Step 9</h5>
+                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600" style="color: var(--primary-color);">Step 9</h5>
                             <p class="font-semibold text-slate-800">Monthly Check-in</p>
                             <p class="text-sm text-slate-600 mt-1">Brief email/call to review budget adherence.</p>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600">Step 10</h5>
+                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600" style="color: var(--primary-color);">Step 10</h5>
                             <p class="font-semibold text-slate-800">Quarterly Review</p>
                             <p class="text-sm text-slate-600 mt-1">45-min review. Investment performance check & minor plan adjustments.</p>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 md:col-span-2">
-                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600">Step 11</h5>
+                            <h5 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wide text-blue-600" style="color: var(--primary-color);">Step 11</h5>
                             <p class="font-semibold text-slate-800">Annual Review & Renewal</p>
                             <p class="text-sm text-slate-600 mt-1">Comprehensive plan update. Rebalance portfolio. Discuss upgrade to Growth/Pro package.</p>
                         </div>
@@ -594,7 +583,7 @@
         <!-- Case Study Section -->
         <section id="casestudy" class="section-card p-6 md:p-8 mb-12">
             <h3 class="text-2xl font-bold mb-6 flex items-center">
-                 <svg class="h-6 w-6 mr-3 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                 <svg class="h-6 w-6 mr-3 text-blue-500" style="color: var(--primary-color);" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                 </svg>
                 Hypothetical Case Study
@@ -626,22 +615,22 @@
         </section>
     </main>
 
-    <!-- Final CTA Section (ADDED) -->
+    <!-- Final CTA Section (Styled like Script B) -->
     <section class="final-cta">
         <div class="container mx-auto px-4">
             <h2>Ready to Achieve Financial Clarity?</h2>
             <p>Let our experts build the financial framework for your success. Schedule a free, no-obligation consultation today.</p>
-            <a href="https://rig-global-solutions.github.io/preview/show_your_interest_page.html" class="btn btn-primary btn-pulse">Schedule Your Free Consultation</a>
+            <a href="https://rig-global-solutions.github.io/preview/show_your_interest_page.html" class="btn-pulse">Schedule Your Free Consultation</a>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer (From Script B) -->
     <footer class="main-footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-brand">
-                        <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="RIG Global Solutions Logo" class="logo">
+                        <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="RIG Global Solutions Logo" class="logo" onerror="this.style.display='none';">
                         <div class="brand-text">
                             <h4 style="color: white;">RIG Global Solutions</h4>
                             <p style="color: rgba(255,255,255,0.7);">Empowering Solutions- Strategically, Sustainably & Globally</p>
@@ -653,6 +642,15 @@
                         <a href="https://www.linkedin.com/company/rig-global-solutions/" target="_blank" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg></a>
                         <a href="https://wa.me/c/918617715655" target="_blank" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg></a>
                     </div>
+                </div>
+                <div class="footer-col">
+                    <h4 class="col-title">Contact Info</h4>
+                    <ul>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>Address: WB, India- 721601</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 256h64c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>GSTIN: 19BGKPR8647B1ZX</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg>+91 8617715655</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112v288c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm0 48h416v54.4c-22.1 16.2-50.6 37.1-84.8 62.4c-25.2 18.5-52.6 35.8-82.9 50.4L256 339.1l-35.4-15.1c-30.4-14.6-57.7-31.9-82.9-50.4C22.6 202.5 50.1 181.6 72.2 166.4H48V112zM48 212.2V400h416V212.2c-22.5 15.5-48.1 33.6-76.3 53.3c-27.4 19.1-55.9 37-86.4 51.9l-19.5 9.8L256 339.1l-19.5-9.8c-30.5-14.9-59-32.8-86.4-51.9C104.1 245.8 78.5 227.7 56 212.2H48z"/></svg>info@rigfinancialservices.com</li>
+                    </ul>
                 </div>
                 <div class="footer-col">
                     <h4 class="col-title">Quick Links</h4>
@@ -712,8 +710,6 @@
                     }
                 });
             });
-
-            // Note: Tab script removed as tabs were replaced with vertical timeline.
         });
     </script>
 
