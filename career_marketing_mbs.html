@@ -27,7 +27,6 @@
             z-index: 50;
             backdrop-filter: blur(10px);
             background-color: rgba(253, 251, 248, 0.8);
-            /* Added for smooth hide/show transition */
             transition: transform 0.3s ease-out;
         }
         .detail-card {
@@ -53,17 +52,19 @@
         /* Ensure OL lists in main show numbers */
         main ol li {
             position: relative;
-            /* Use list-decimal for numbers */
             list-style-type: decimal;
-            /* Adjust padding to align with other lists */
             padding-left: 0.5rem; 
-            margin-left: 1.5rem; /* Indent the numbered list */
+            margin-left: 1.5rem;
         }
         main ol li::before {
-            content: none; /* Remove custom bullet */
+            content: none;
         }
         
-        /* Reset for footer lists */
+        /* Footer & Extra Styles */
+        .group:hover .group-hover\:text-white { color: #fff; }
+        .group:hover .group-hover\:text-gray-200 { color: #e5e7eb; }
+        
+        /* Reset for footer lists to avoid conflicts with main styles */
         footer li {
             padding-left: 0;
             list-style-type: none;
@@ -73,34 +74,46 @@
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased flex flex-col min-h-screen">
 
+    <!-- UPDATED HEADER (From Script 2) -->
     <header id="navbar" class="sticky-nav shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             
-            <a href="http://www.rigfinancialservices.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3">
-                <img src="https://www.rigfinancialservices.com/logo.png" alt="RIG Global Solutions Logo" class="h-12 w-auto"> 
+            <a href="https://rig-global-solutions.github.io/preview/" class="flex items-center gap-3">
+                <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="RIG Global Solutions Logo" class="h-12 w-auto"> 
                 <div>
                     <h4 class="text-xl font-bold text-gray-800">RIG Global Solutions</h4>
                     <p class="text-xs text-gray-600">Empowering Solutions - Strategically, Sustainably & Globally</p>
                 </div>
             </a>
             
-            <div class="hidden md:flex items-center space-x-6">
-                <a href="https://www.rigfinancialservices.com/career_home.html" class="nav-link text-gray-600 text-sm">Home</a>
-                <a href="https://forms.gle/teDcmwUh1XysX4T9A" target="_blank" class="bg-[#3A3A3A] text-white py-2 px-4 rounded-lg hover:bg-[#505050] transition-colors text-sm">Apply Now</a>
+            <div class="hidden md:flex space-x-4">
+                <a href="https://rig-global-solutions.github.io/preview/#mission" class="nav-link text-gray-600 text-sm">Our Mission</a>
+                <a href="https://rig-global-solutions.github.io/preview/#philosophy" class="nav-link text-gray-600 text-sm">Why Us</a>
+                <a href="https://rig-global-solutions.github.io/preview/#pathway" class="nav-link text-gray-600 text-sm">Career Path</a>
+                <a href="https://rig-global-solutions.github.io/preview/#departments" class="nav-link text-gray-600 text-sm">Departments</a>
+                <a href="https://rig-global-solutions.github.io/preview/#openings" class="nav-link text-gray-600 text-sm">Openings</a>
             </div>
+            
+            <a href="https://forms.gle/teDcmwUh1XysX4T9A" target="_blank" class="hidden md:block bg-[#3A3A3A] text-white py-2 px-4 rounded-lg hover:bg-[#505050] transition-colors text-sm">Apply Now</a>
             
             <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
                 <span class="text-3xl">☰</span>
             </button>
         </nav>
         <div id="mobile-menu" class="hidden md:hidden">
-            <a href="https://www.rigfinancialservices.com/career_home.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Home</a>
-            <a href="https://forms.gle/teDcmwUh1XysX4T9A" target="_blank" class="block py-2 px-4 text-sm bg-[#3A3A3A] text-white text-center rounded-b-lg hover:bg-[#505050] transition-colors">Apply Now</a>
+            <a href="https://rig-global-solutions.github.io/preview/#mission" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Our Mission</a>
+            <a href="https://rig-global-solutions.github.io/preview/#philosophy" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Why Us</a>
+            <a href="https://rig-global-solutions.github.io/preview/#pathway" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Career Path</a>
+            <a href="https://rig-global-solutions.github.io/preview/#departments" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Departments</a>
+            <a href="https://rig-global-solutions.github.io/preview/#openings" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Openings</a>
+             <a href="https://forms.gle/teDcmwUh1XysX4T9A" target="_blank" class="block py-2 px-4 text-sm bg-[#3A3A3A] text-white text-center rounded-b-lg hover:bg-[#505050] transition-colors">Apply Now</a>
         </div>
     </header>
-    <main class="py-16 md:py-24">
+
+    <!-- MAIN CONTENT (Marketing & Branding Specialist) -->
+    <main class="py-16 md:py-24 flex-grow">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-xl shadow-lg">
                 <div class="text-center border-b border-gray-200 pb-6 mb-8">
@@ -197,13 +210,14 @@
         </div>
     </main>
 
+    <!-- UPDATED FOOTER (From Script 2) -->
     <footer class="bg-[#2a2a2a] text-gray-300 py-12">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
                 
                 <div class="md:col-span-4">
-                    <a href="http://www.rigfinancialservices.com" target="_blank" rel="noopener noreferrer" class="flex items-start gap-4 hover:text-white group">
-                        <img src="https://www.rigfinancialservices.com/logo.png" alt="RIG Global Solutions Logo" class="logo h-16 w-auto flex-shrink-0">
+                    <a href="https://rig-global-solutions.github.io/preview/" target="_blank" rel="noopener noreferrer" class="flex items-start gap-4 hover:text-white group">
+                        <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="RIG Global Solutions Logo" class="logo h-16 w-auto flex-shrink-0">
                         <div class="brand-text">
                             <h3 class="text-lg font-semibold text-white mb-2 whitespace-nowrap group-hover:text-white">RIG Global Solutions</h3>
                             <p class="text-sm text-gray-300 group-hover:text-gray-200">Empowering Solutions - Strategically,</p>
@@ -215,7 +229,7 @@
                 <div class="md:col-span-2">
                     <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="https://www.rigfinancialservices.com/career_home.html#openings" class="hover:text-white">Current Openings</a></li>
+                        <li><a href="https://rig-global-solutions.github.io/preview/#openings" class="hover:text-white">Current Openings</a></li>
                         <li><a href="#" class="hover:text-white">Application Status</a></li>
                         <li><a href="#" class="hover:text-white">Company Policies</a></li>
                     </ul>
@@ -223,11 +237,11 @@
 
                 <div class="md:col-span-4">
                     <h3 class="text-lg font-semibold text-white mb-4">Contact</h3>
-                       <ul class="space-y-2 text-sm">
+                        <ul class="space-y-2 text-sm">
                             <li class="whitespace-nowrap">Email: <a href="mailto:talent@rigfinancialservices.com" class="hover:text-white">talent@rigfinancialservices.com</a></li>
                             <li class="whitespace-nowrap">Phone: <a href="tel:+918617715655" class="hover:text-white">+91 86177 15655</a></li>
-                            <li class="whitespace-nowrap">Website: <a href="http://www.rigfinancialservices.com" target="_blank" class="hover:text-white">www.rigfinancialservices.com</a></li>
-                       </ul>
+                            <li class="whitespace-nowrap">Website: <a href="https://rig-global-solutions.github.io/preview/" target="_blank" class="hover:text-white">rig-global-solutions.github.io/preview/</a></li>
+                        </ul>
                 </div>
 
                 <div class="md:col-span-2">
@@ -247,12 +261,14 @@
             </div>
         </div>
     </footer>
+
     <button id="scrollToTopBtn" class="fixed bottom-6 right-6 bg-[#C5A47E] text-white p-3 rounded-full shadow-lg hover:bg-[#b5946e] transition-all duration-300 opacity-0 invisible z-50">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
     </button>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu Toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
 
@@ -262,69 +278,37 @@
                 });
             }
             
-            // Close mobile menu when a link is clicked
-            document.querySelectorAll('#mobile-menu a').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    if(mobileMenu.classList.contains('hidden') === false) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                });
-            });
-
-            // Smooth scroll for any # links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    // Only prevent default if it's a hash link
-                    if (this.getAttribute('href').startsWith('#')) {
-                        e.preventDefault();
-                        const targetElement = document.querySelector(this.getAttribute('href'));
-                        if (targetElement) {
-                            targetElement.scrollIntoView({
-                                behavior: 'smooth'
-                            });
-                        }
-                    }
-                });
-            });
-
-            // --- Sticky Header Hide/Show on Scroll ---
+            // Sticky Header Logic
             const header = document.getElementById('navbar');
             let lastScrollTop = 0;
-            if (header) {
-                window.addEventListener('scroll', function() {
-                    let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                    if (currentScrollTop > lastScrollTop && currentScrollTop > header.offsetHeight) {
-                        // Scroll Down
-                        header.style.transform = 'translateY(-100%)';
-                    } else {
-                        // Scroll Up
-                        header.style.transform = 'translateY(0)';
-                    }
-                    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; 
-                });
-            }
+            window.addEventListener('scroll', function() {
+                let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (currentScrollTop > lastScrollTop && currentScrollTop > header.offsetHeight) {
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    header.style.transform = 'translateY(0)';
+                }
+                lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; 
+            });
 
-            // --- Scroll to Top Button ---
+            // Scroll to Top Logic
             const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-            if (scrollToTopBtn) {
-                window.addEventListener('scroll', () => {
-                    if (window.pageYOffset > 300) { // Show after 300px
-                        scrollToTopBtn.classList.remove('opacity-0', 'invisible');
-                        scrollToTopBtn.classList.add('opacity-100', 'visible');
-                    } else {
-                        scrollToTopBtn.classList.remove('opacity-100', 'visible');
-                        scrollToTopBtn.classList.add('opacity-0', 'invisible');
-                    }
-                });
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.remove('opacity-0', 'invisible');
+                    scrollToTopBtn.classList.add('opacity-100', 'visible');
+                } else {
+                    scrollToTopBtn.classList.remove('opacity-100', 'visible');
+                    scrollToTopBtn.classList.add('opacity-0', 'invisible');
+                }
+            });
 
-                scrollToTopBtn.addEventListener('click', () => {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
                 });
-            }
-
+            });
         });
     </script>
 
