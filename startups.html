@@ -42,6 +42,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative; /* Context for mega menu */
         }
         .section {
             padding: 80px 0;
@@ -51,7 +52,7 @@
         }
 
         /* --- Typography --- */
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             font-weight: 700;
             color: var(--primary-color);
             line-height: 1.2;
@@ -59,6 +60,7 @@
         h1 { font-size: 3.5rem; margin-bottom: 1rem; color: var(--light-color); }
         h2 { font-size: 2.25rem; margin-bottom: 1.5rem; text-align: center; }
         h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color); }
+        h4 { font-size: 1.25rem; margin-bottom: 0.5rem; }
         p { margin-bottom: 1rem; color: #555; }
 
         /* --- Header --- */
@@ -98,19 +100,97 @@
             font-size: 0.8rem;
             color: var(--dark-color);
         }
-        .main-nav ul { list-style: none; display: flex; }
+        
+        .main-nav ul { list-style: none; display: flex; align-items: center; }
         .main-nav ul li { margin-left: 30px; }
-        .main-nav ul li a {
+        .main-nav ul li a.nav-link {
             text-decoration: none;
             color: var(--dark-color);
             font-weight: 600;
             transition: color 0.3s ease;
             padding: 5px 0;
             border-bottom: 2px solid transparent;
+            display: block;
         }
-        .main-nav ul li a:hover, .main-nav ul li a.active {
+        .main-nav ul li a.nav-link:hover, .main-nav ul li a.nav-link.active {
             color: var(--primary-color);
             border-bottom-color: var(--accent-color);
+        }
+
+        /* --- MEGA MENU CSS --- */
+        .has-megamenu {
+            position: static; /* Allows menu to be full width of container/header */
+        }
+        
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: var(--light-color);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-top: 3px solid var(--primary-color);
+            padding: 40px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        /* Hover Effect for Desktop */
+        @media (min-width: 993px) {
+            .has-megamenu:hover .mega-menu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+        }
+
+        .mega-menu-inner {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .mega-menu-col .category {
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .mega-menu-col ul {
+            display: block;
+            margin: 0;
+            padding: 0;
+            list-style: none; /* Reset specifically for mega menu cols */
+        }
+
+        .mega-menu-col ul li {
+            margin: 0 0 15px 0;
+            display: block;
+        }
+
+        .mega-menu-col ul li a {
+            font-weight: 400;
+            padding: 8px 15px;
+            display: block;
+            text-decoration: none;
+            color: var(--dark-color);
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            border-radius: 4px;
+        }
+
+        .mega-menu-col ul li a:hover {
+            color: var(--primary-color);
+            border-left-color: var(--growth-color);
+            background: rgba(0, 51, 160, 0.05);
+            transform: translateX(5px);
         }
 
         /* --- Hero Section --- */
@@ -186,9 +266,9 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- Service Cards --- */
+        /* --- Service Cards (Startup Specific) --- */
         .service-card {
-            background: var(--white);
+            background: var(--light-color);
             padding: 30px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
@@ -274,12 +354,47 @@
         /* --- Responsive Design --- */
         @media (max-width: 992px) {
              .footer-grid { grid-template-columns: 1fr 1fr; }
+             
+             .main-header .container { flex-direction: column; gap: 15px;}
+             .main-nav ul { padding: 0; flex-direction: column; width: 100%; }
+             .main-nav ul li { margin: 10px 0; width: 100%; text-align: center; }
+             
+             /* Mobile Mega Menu Styling */
+             .has-megamenu .mega-menu {
+                display: none;
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border-top: none;
+                padding: 10px 0;
+                background-color: #f9f9f9;
+            }
+            
+            /* Toggle class added via JS */
+            .has-megamenu.dropdown-active .mega-menu {
+                display: block;
+            }
+
+            .mega-menu-inner {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                padding: 0 20px;
+                text-align: left;
+            }
+            
+            .mega-menu-col .category {
+                font-size: 1rem;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #ddd;
+            }
         }
+        
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             h2 { font-size: 2rem; }
-            .main-header .container { flex-direction: column; gap: 15px;}
-            .main-nav ul { padding: 0; }
             .hero { height: auto; padding: 120px 0 80px 0; }
             .tabs { flex-direction: column; }
             .tab-button { margin-bottom: 10px; border-bottom: 1px solid var(--border-color); }
@@ -293,8 +408,8 @@
 
     <header class="main-header">
         <div class="container">
-            <a href="https://www.rigfinancialservices.com/" class="brand">
-                <img src="https://www.rigfinancialservices.com/logo.png" alt="Rig Global Solutions Logo" class="logo">
+            <a href="https://rig-global-solutions.github.io/preview/" class="brand">
+                <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="Rig Global Solutions Logo" class="logo">
                 <div class="brand-text">
                     <h4>Rig Global Solutions</h4>
                     <p>Empowering Solutions- Strategically, Sustainably & Globally</p>
@@ -302,8 +417,52 @@
             </a>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="https://www.rigfinancialservices.com/" class="nav-link">Home</a></li>
-                    <li><a href="#services" class="nav-link active">Our Kits</a></li>
+                    <li><a href="https://rig-global-solutions.github.io/preview/" class="nav-link">Home</a></li>
+                    <li><a href="sarathi.html" class="nav-link">Sarathi</a></li>
+                    
+                    <!-- Added Services Mega Menu -->
+                    <li class="has-megamenu">
+                        <a href="#services" class="nav-link">Services <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 5px;"></i></a>
+                        <div class="mega-menu">
+                            <div class="container mega-menu-inner">
+                                <div class="mega-menu-col">
+                                    <h4 class="category">Foundational Services</h4>
+                                    <ul>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/accounting_page.html">Accounting & Bookkeeping</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/legal_page.html">Legal & Corporate Services</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/tax_page.html">Tax & Compliance</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/hr_page.html">Human Resources Services</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-col">
+                                    <h4 class="category">Growth & Strategy</h4>
+                                    <ul>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/business_strategy_page.html">Business Strategy & Consulting</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/finance_page.html">Strategic Financial Solutions</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/marketing_&_branding_page.html">Branding & Marketing</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-col">
+                                    <h4 class="category">Technology & Automation</h4>
+                                    <ul>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/web_development_page.html">Web Design & Development</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/crm_page.html">CRM & System Automation</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/it_page.html">IT Infrastructure & Support</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-col">
+                                    <h4 class="category">Special Services</h4>
+                                    <ul>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/government.html">For Government & Public Sector</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/corporates.html">For Corporates & Enterprises</a></li>
+                                        <li><a href="https://rig-global-solutions.github.io/preview/individuals.html">For Individuals & Founders</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- End Services Mega Menu -->
+
                     <li><a href="#why-us" class="nav-link">Why Us</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
@@ -316,7 +475,7 @@
             <div class="container hero-content">
                 <h1>For Startups & MSMEs</h1>
                 <p>Your Strategic Partner from Idea to Impact. We empower Indian Startups & MSMEs to launch, validate, and scale with integrated, strategic, and sustainable solutions.</p>
-                <a href="https://www.rigfinancialservices.com/show_your_interest_page.html" class="btn">Get a Free Consultation</a>
+                <a href="https://rig-global-solutions.github.io/preview/show_your_interest_page.html" class="btn">Get a Free Consultation</a>
             </div>
         </section>
 
@@ -419,7 +578,7 @@
                     <strong>Email:</strong> <a href="mailto:info@rigfinancialservices.com">info@rigfinancialservices.com</a><br>
                     <strong>Phone:</strong> <a href="tel:+918617715655">+91 86177 15655</a>
                 </p>
-                <a href="https://www.rigfinancialservices.com/show_your_interest_page.html" class="btn" style="margin-top: 1rem;">Contact Us Now</a>
+                <a href="https://rig-global-solutions.github.io/preview/show_your_interest_page.html" class="btn" style="margin-top: 1rem;">Contact Us Now</a>
             </div>
         </section>
 
@@ -429,8 +588,8 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="https://www.rigfinancialservices.com/" class="brand" style="margin-bottom: 1.5rem;">
-                        <img src="https://www.rigfinancialservices.com/logo.png" alt="Rig Global Solutions Logo" class="logo">
+                    <a href="https://rig-global-solutions.github.io/preview/" class="brand" style="margin-bottom: 1.5rem;">
+                        <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="Rig Global Solutions Logo" class="logo">
                         <div class="brand-text">
                            <h4>Rig Global Solutions</h4>
                            <p>Empowering Solutions- Strategically, Sustainably & Globally</p>
@@ -487,6 +646,9 @@
         // --- Active Nav Link on Scroll ---
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
+        
+        // Exclude dropdown links from the scroll spy
+        const pageNavLinks = Array.from(navLinks).filter(link => !link.closest('.mega-menu'));
 
         window.addEventListener('scroll', ()=> {
             let current = '';
@@ -497,12 +659,26 @@
                 }
             })
             
-            navLinks.forEach( a => {
+            pageNavLinks.forEach( a => {
                 a.classList.remove('active');
-                if(a.getAttribute('href').substring(1) === current){
+                // Only mark as active if it's an internal link
+                if(a.getAttribute('href').startsWith('#') && a.getAttribute('href').substring(1) === current){
                     a.classList.add('active');
                 }
             })
+        });
+
+        // --- Mobile Mega Menu Toggle ---
+        const menuItemsWithChildren = document.querySelectorAll('.has-megamenu > a');
+        menuItemsWithChildren.forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Check if we are on a mobile screen size (<= 992px matches CSS breakpoint)
+                if (window.innerWidth <= 992) {
+                    e.preventDefault(); // Prevent navigating to the link
+                    const parent = this.parentElement;
+                    parent.classList.toggle('dropdown-active'); // Toggle visibility
+                }
+            });
         });
     </script>
 </body>
