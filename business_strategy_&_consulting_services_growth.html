@@ -72,11 +72,15 @@
         .main-header .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;}
         
         .brand { display: flex; align-items: center; text-decoration: none; }
-        .brand .logo-icon { 
-            font-size: 2.5rem; 
-            color: var(--primary-color); 
+        
+        /* Updated Logo CSS for Image */
+        .brand .logo { 
+            width: 55px; 
+            height: 55px; 
             margin-right: 15px; 
+            object-fit: contain; 
         }
+
         .brand-text h4 { margin: 0; font-size: 1.5rem; color: var(--primary-color); font-weight: 700; line-height: 1.2;}
         .brand-text p { margin: 0; font-size: 0.85rem; color: var(--color-purple); font-weight: 500;}
 
@@ -157,10 +161,12 @@
         .footer-col .footer-brand { display: flex; align-items: center; margin-bottom: 20px; }
         
         /* Updated Logo Handling for Footer */
-        .footer-col .logo-icon { 
-            font-size: 2.5rem; 
-            color: var(--white); 
+        .footer-col .logo { 
+            width: 60px; 
+            height: 60px; 
             margin-right: 15px; 
+            /* REMOVED FILTER to fix white box issue */
+            object-fit: contain;
         }
 
         .footer-col h4.col-title {
@@ -286,7 +292,7 @@
     <header class="main-header" id="mainHeader">
         <div class="container">
             <a href="https://rig-global-solutions.github.io/preview/" class="brand">
-                <!-- Replaced Image with FontAwesome Icon to fix "Blank" issue -->
+                <!-- Replaced Icon with actual Logo Image -->
                 <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="RIG Global Solutions Logo" class="logo">
                 <div class="brand-text">
                     <h4>RIG Global Solutions</h4>
@@ -319,7 +325,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="https://rig-global-solutions.github.io/preview/show_your_interest_page.html" class="nav-btn">Scale My Business</a>
+                        <a href="https://rig-global-solutions.github.io/preview/show_your_interest_page.html" class="nav-btn">Start Growth</a>
                     </li>
                 </ul>
             </nav>
@@ -452,7 +458,7 @@
         <div class="container animate-on-scroll relative z-10">
             <h2>Ready to Build Your Growth Strategy?</h2>
             <p>Let's connect to discuss how RIG Global Solutions can tailor a strategic plan to unlock your SME's full potential.</p>
-            <a href="https://rig-global-solutions.github.io/preview/show_your_interest_page.html" target="_blank" class="btn-cta btn-pulse">Scale My Business</a>
+            <a href="http://www.rigfinancialservices.com" target="_blank" class="btn-cta btn-pulse">Schedule a Consultation</a>
         </div>
     </section>
 
@@ -462,7 +468,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-brand">
-                         <!-- Replaced Image with FontAwesome Icon here too -->
+                         <!-- Replaced Icon with actual Logo Image here too -->
                          <img src="https://rig-global-solutions.github.io/preview/logo.png" alt="RIG Global Solutions Logo" class="logo">
                         <div class="brand-text">
                             <h4 style="color: white; margin: 0; font-size: 1.2rem; font-weight: 700;">RIG Global Solutions</h4>
